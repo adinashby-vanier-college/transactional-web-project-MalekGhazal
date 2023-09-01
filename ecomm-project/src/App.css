@@ -1,0 +1,9 @@
+@import "./theme.css";
+
+.test {
+  color: var(--secondary-baige);
+}
+
+body {
+  background-color: var(--primary-blue);
+}
