@@ -1,0 +1,12 @@
+.header{
+    color: var(--primary-baige);
+    font:20px;
+    text-align: center;
+    padding: 40px;
+}
+
+.description{
+    color:var(--secondary-baige);
+    padding: 0 30px;
+    text-align: justify;
+}
