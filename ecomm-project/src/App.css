@@ -7,3 +7,35 @@
 body {
   background-color: var(--primary-blue);
 }
+
+.navbar-toggler {
+  color: var(--secondary-baige);
+  border: none;
+}
+
+.primary-blue-color {
+  color: var(--primary-blue);
+}
+
+.secondary-blue-color {
+  color: var(--secondary-blue);
+}
+
+.primary-baige-color {
+  color: var(--primary-baige);
+}
+
+.secondary-baige-color {
+  color: var(--secondary-baige);
+}
+
+.login-btn {
+  background: none;
+  border: 1px solid var(--primary-baige);
+
+  &:hover {
+    background-color: var(--secondary-baige);
+    color: var(--primary-blue);
+    border: none;
+  }
+}
