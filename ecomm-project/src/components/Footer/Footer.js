@@ -5,13 +5,25 @@ const Footer = () => {
     <footer className="bg-body-transparent secondary-baige-color p-4 fixed-bottom pb-2 pl-6">
       <div className="d-flex align-items-center">
         <div className="d-flex justify-content-start align-items-center pl-3 fs-4">
-          <a href="#" className="text-white mr-3" style={{ paddingLeft: 20 }}>
+          <a
+            href="#instagram"
+            className="text-white mr-3"
+            style={{ paddingLeft: 20 }}
+          >
             <i className="fab fa-instagram"></i>
           </a>
-          <a href="#" className="text-white mr-3" style={{ paddingLeft: 20 }}>
+          <a
+            href="#facebook"
+            className="text-white mr-3"
+            style={{ paddingLeft: 20 }}
+          >
             <i className="fab fa-facebook"></i>
           </a>
-          <a href="#" className="text-white mr-3" style={{ paddingLeft: 20 }}>
+          <a
+            href="#twitter"
+            className="text-white mr-3"
+            style={{ paddingLeft: 20 }}
+          >
             <i className="fab fa-twitter"></i>
           </a>
         </div>
