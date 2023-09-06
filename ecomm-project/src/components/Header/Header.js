@@ -39,7 +39,7 @@ const Header = () => {
                 Products
               </Nav.Link>
               <Nav.Link
-                href="#"
+                href="/about"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
