@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -39,7 +40,8 @@ const Header = () => {
                 Products
               </Nav.Link>
               <Nav.Link
-                href="/about"
+                as={Link}
+                to="/about"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >

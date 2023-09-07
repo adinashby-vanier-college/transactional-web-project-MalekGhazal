@@ -1,12 +1,18 @@
-.header{
-    color: var(--primary-baige);
-    font:20px;
-    text-align: center;
-    padding: 40px;
+.header {
+  color: var(--primary-baige);
+  text-align: center;
+  text-shadow: 2px 2px 0px #f1f0e8;
+  font-family: DM Serif Display;
+  font-size: 96px;
+  font-weight: 400;
+  padding-top: 3rem;
 }
 
-.description{
-    color:var(--secondary-baige);
-    padding: 0 30px;
-    text-align: justify;
+.description {
+  color: var(--secondary-baige);
+  font-family: DM Serif Display;
+  padding-top: 3rem;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 2rem;
 }
