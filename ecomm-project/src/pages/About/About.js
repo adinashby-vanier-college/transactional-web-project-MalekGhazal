@@ -1,13 +1,10 @@
 import React from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import Container from "react-bootstrap/Container";
 import styles from "./About.module.css";
 
 const About = () => {
   return (
     <div>
-      <Header />
       <Container fluid className="px-5">
         <h1 className={styles.header}>About Ecomm</h1>
         <p className={styles.description}>
@@ -23,8 +20,6 @@ const About = () => {
           converge, providing you with nothing but the best.
         </p>
       </Container>
-
-      <Footer />
     </div>
   );
 };
