@@ -26,7 +26,8 @@ const Header = () => {
           <Navbar.Collapse id="responsive-navbar-nav" className="text-center">
             <Nav className="me-auto mx-auto">
               <Nav.Link
-                href="#action1"
+                as={Link}
+                to="/"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
