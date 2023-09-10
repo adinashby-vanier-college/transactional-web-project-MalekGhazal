@@ -6,6 +6,13 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const scrollToAboutUs = () => {
+    const aboutUsSection = document.getElementById("about-us-section");
+    if (aboutUsSection) {
+      aboutUsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-transparent">
@@ -15,7 +22,7 @@ const Header = () => {
             className="secondary-baige-color"
             style={{ fontSize: "44px" }}
           >
-            Ecomm
+            EBRA
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav">
             <i
@@ -41,15 +48,15 @@ const Header = () => {
                 Products
               </Nav.Link>
               <Nav.Link
-                as={Link}
-                to="/about"
+                href="#about"
+                onClick={scrollToAboutUs}
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
                 About Us
               </Nav.Link>
               <Nav.Link
-                href="#"
+                href="#contact"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >

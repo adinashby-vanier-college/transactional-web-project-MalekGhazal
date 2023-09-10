@@ -1,18 +1,21 @@
 .header {
   color: var(--primary-baige);
-  text-align: center;
   text-shadow: 2px 2px 0px #f1f0e8;
-  font-family: DM Serif Display;
   font-size: 96px;
   font-weight: 400;
-  padding-top: 3rem;
+  padding-top: 8.5rem;
 }
 
 .description {
   color: var(--secondary-baige);
-  font-family: DM Serif Display;
   padding-top: 3rem;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 400;
-  line-height: 2rem;
+  line-height: 2.3rem;
+}
+
+@media (max-width: 850px) {
+  .description {
+    font-size: 20px; /* Adjust this value as needed */
+  }
 }
