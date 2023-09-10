@@ -1,5 +1,11 @@
 @import "./theme.css";
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .test {
   color: var(--secondary-baige);
 }

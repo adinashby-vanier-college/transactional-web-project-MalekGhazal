@@ -1,13 +1,15 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import snowman from "./snowman.png";
+import Image from "react-bootstrap/Image";
+import HeroImage from "../../assets/Fashion-6.png";
+import "./Home.css";
 
 function Home() {
   return (
     <>
       <div className="container">
         <div className="row h-100">
-          <div className="col secondary-baige-color align-items-center">
+          <div className="col-lg-4 secondary-baige-color align-items-center custom-centered-div">
             <h1 style={{ fontSize: "52px", marginTop: "20vh" }}>
               Elevate Your Style
             </h1>
@@ -18,20 +20,8 @@ function Home() {
               Explore Now
             </Button>
           </div>
-          <div
-            className="col"
-            style={{ width: "50%", background: "transparent" }}
-          >
-            <img
-              src={snowman}
-              alt="decorative snowman"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                backgroundColor: "transparent",
-              }}
-            ></img>
+          <div className="col-lg-8">
+            <Image src={HeroImage} fluid />
           </div>
         </div>
       </div>

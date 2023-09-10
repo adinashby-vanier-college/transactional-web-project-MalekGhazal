@@ -1,0 +1,22 @@
+.main-footer {
+  margin-top: auto;
+  background-color: var(--secondary-baige);
+}
+
+.footer-middle {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.footer-bottom {
+  padding-top: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-blue);
+
+  &:hover {
+    color: var(--secondary-blue);
+  }
+}
