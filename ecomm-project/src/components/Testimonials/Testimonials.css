@@ -1,0 +1,7 @@
+.testimonials {
+  color: var(--primary-blue);
+  text-shadow: 2px 2px 0px var(--secondary-blue);
+  font-size: 96px;
+  font-weight: 400;
+  padding-top: 8.5rem;
+}

@@ -13,6 +13,13 @@ const Header = () => {
     }
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact-section");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-transparent">
@@ -57,6 +64,7 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link
                 href="#contact"
+                onClick={scrollToContact}
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
