@@ -6,6 +6,8 @@ const Contact = () => {
     <>
       <div id="contact-section" className="container py-4">
         <h1 className="header text-center pb-3">Get in touch!</h1>
+        <div className="about-border mt-0"></div>
+
         <form id="contactForm">
           <div className="mb-3">
             <label className="form-label custom-label" htmlFor="name">

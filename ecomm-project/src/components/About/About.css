@@ -6,6 +6,14 @@
   padding-top: 8.5rem;
 }
 
+.about-border {
+  width: 160px;
+  height: 5px;
+  background: var(--primary-baige);
+  margin: 26px auto;
+  border-radius: 25px;
+}
+
 .description {
   color: var(--secondary-baige);
   padding-top: 3rem;

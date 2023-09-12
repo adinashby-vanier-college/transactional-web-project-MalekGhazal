@@ -1,7 +1,51 @@
-.testimonials {
+.title {
   color: var(--primary-blue);
   text-shadow: 2px 2px 0px var(--secondary-blue);
   font-size: 96px;
   font-weight: 400;
   padding-top: 8.5rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 76px;
+  }
+}
+
+.border {
+  width: 160px;
+  height: 5px;
+  background: var(--primary-blue);
+  margin: 26px auto;
+  border-radius: 25px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  height: 450px;
+}
+
+.item img {
+  border: 2px solid var(--primary-blue);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.stars {
+  color: var(--primary-blue);
+  margin-bottom: 20px;
 }

@@ -8,6 +8,7 @@ const About = () => {
   return (
     <div id="about-us-section" className="container">
       <h1 className="header text-center">About Ebra</h1>
+      <div className="about-border"></div>
 
       {/* First section */}
       <div className="row align-items-center">
