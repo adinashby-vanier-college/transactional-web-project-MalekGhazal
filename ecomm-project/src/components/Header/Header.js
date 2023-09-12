@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -77,9 +76,14 @@ const Header = () => {
                 style={{ fontSize: "24px" }}
               ></i>
             </a>
-            <Button className="login-btn" style={{ fontSize: "20px" }}>
+            <Nav.Link
+              as={Link}
+              to="/login"
+              className="login-btn"
+              style={{ fontSize: "20px" }}
+            >
               LOGIN
-            </Button>
+            </Nav.Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>

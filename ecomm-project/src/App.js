@@ -3,11 +3,9 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import About from "./components/About/About";
 import Home from "./pages/Home/Home";
-import FAQ from "./components/FAQ/FAQ";
-import Testimonial from "./components/Testimonials/Testimonial";
-import Contact from "./components/Contact/Contact";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
   return (
@@ -16,11 +14,9 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
-        <About />
-        <Testimonial />
-        <FAQ />
-        <Contact />
         <Footer />
       </div>
     </Router>
