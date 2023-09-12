@@ -4,12 +4,12 @@ import Accordion from "react-bootstrap/Accordion";
 const FAQ = () => {
   return (
     <>
-      <h1 className="header text-center pb-5">FAQ</h1>
+      <h1 className="header text-center pt-0">FAQ</h1>
+      <div className="about-border mb-5"></div>
+
       <Accordion defaultActiveKey="0" className="container faq">
         <Accordion.Item eventKey="0">
-          <Accordion.Header className="custom-header">
-            What is your return policy?
-          </Accordion.Header>
+          <Accordion.Header>What is your return policy?</Accordion.Header>
           <Accordion.Body>
             We offer a hassle-free return policy for clothing items. If you're
             not completely satisfied with your purchase, you can return it
