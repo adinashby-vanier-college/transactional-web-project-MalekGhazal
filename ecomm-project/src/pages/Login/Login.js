@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import styles from "./Login.module.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
@@ -23,7 +22,6 @@ const Login = () => {
 
   return (
     <>
-      <Header />
       <Container fluid className="px-5">
         <h1 className={styles.header}>Login</h1>
 
@@ -52,8 +50,12 @@ const Login = () => {
             </InputGroup>
 
             <div className={styles.textbox}>
-              <a className={styles.text}>Sign up</a>
-              <a className={styles.text}>Forget your password?</a>
+              <Link to="/signup" className={styles.text}>
+                Sign up
+              </Link>
+              <a href="#password" className={styles.text}>
+                Forget your password?
+              </a>
             </div>
 
             <Button type="submit" className={styles.submit}>
@@ -71,8 +73,6 @@ const Login = () => {
           </div>
         </div>
       </Container>
-
-      <Footer />
     </>
   );
 };

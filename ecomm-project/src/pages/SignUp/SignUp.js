@@ -1,7 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import styles from "./SignUp.module.css";
@@ -23,7 +21,6 @@ const SignUp = () => {
 
   return (
     <>
-      <Header />
       <Container fluid className="px-5">
         <h1 className={styles.header}>Sign Up</h1>
 
@@ -75,8 +72,6 @@ const SignUp = () => {
           </div>
         </div>
       </Container>
-
-      <Footer />
     </>
   );
 };
