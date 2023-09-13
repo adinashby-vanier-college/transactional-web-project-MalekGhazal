@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import styles from "./Login.module.css";
+import "./Login.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
@@ -23,53 +23,59 @@ const Login = () => {
   return (
     <>
       <Container fluid className="px-5">
-        <h1 className={styles.header}>Login</h1>
+        <h1 className="header">Login</h1>
 
-        <div className={styles.signupform}>
+        <div className="signupform">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <InputGroup className={styles.group}>
-              <InputGroup.Text id="basic-addon1" className={styles.icon}>
+            <InputGroup className="group">
+              <InputGroup.Text id="basic-addon1" className="icon">
                 <i className="fa-solid fa-user"></i>
               </InputGroup.Text>
               <Form.Control
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                className={styles.input}
+                className="input"
               />
             </InputGroup>
 
-            <InputGroup className={styles.group}>
-              <InputGroup.Text id="basic-addon1" className={styles.icon}>
+            <InputGroup className="group">
+              <InputGroup.Text id="basic-addon1" className="icon">
                 <i className="fa-solid fa-lock"></i>
               </InputGroup.Text>
               <Form.Control
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                className={styles.input}
+                className="input"
               />
             </InputGroup>
 
-            <div className={styles.textbox}>
-              <Link to="/signup" className={styles.text}>
+            <div className="textbox">
+              <Link to="/signup" className="text">
                 Sign up
               </Link>
-              <a href="#password" className={styles.text}>
+              <a href="#password" className="text">
                 Forget your password?
               </a>
             </div>
 
-            <Button type="submit" className={styles.submit}>
+            <Button type="submit" className="submit">
               L O G I N
             </Button>
           </Form>
         </div>
 
-        <h5 className={styles.using}>Or Sign up using</h5>
-        <div className={styles.icons}>
-          <div className={styles.box}>
-            <i className="fa-brands fa-google"></i>
-            <i className="fab fa-facebook"></i>
-            <i className="fab fa-twitter"></i>
+        <h5 className="using">Or Sign up using</h5>
+        <div className="icons">
+          <div className="box">
+            <a href="#google" className="icons-btn">
+              <i className="fa-brands fa-google"></i>
+            </a>
+            <a href="#facebook" className="icons-btn">
+              <i className="fab fa-facebook"></i>
+            </a>
+            <a href="#twitter" className="icons-btn">
+              <i className="fab fa-twitter"></i>
+            </a>
           </div>
         </div>
       </Container>
