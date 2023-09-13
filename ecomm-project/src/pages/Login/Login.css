@@ -1,6 +1,6 @@
 .header {
   color: var(--primary-baige);
-  font: 20px;
+  font-size: 5rem;
   text-align: center;
   padding: 30px;
 }
@@ -17,17 +17,11 @@
   text-align: center;
 }
 
-.signupform {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .submit {
   background-color: var(--secondary-baige);
   color: var(--secondary-blue);
   border: 0;
-  width: 250px;
+  width: 300px;
   text-align: center;
   margin-top: 20px;
 }
@@ -38,7 +32,7 @@
 
 .group {
   margin-bottom: 20px;
-  width: 250px;
+  width: 300px;
   padding-bottom: 0;
 }
 
@@ -50,7 +44,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--secondary-baige);
 }
 .textbox {
   display: flex;
@@ -61,16 +54,31 @@
 .text {
   padding-top: 0;
   color: var(--primary-baige);
-  font-size: 14px;
+  font-size: 1rem;
 }
 .input {
   background-color: var(--secondary-baige);
   border-left: 0;
+  height: 2.5rem;
+
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
 }
 
 .box {
-  width: 250px;
+  width: 290px;
   display: flex;
   justify-content: space-between;
   padding: 0 70px;
+  font-size: 1.5rem;
+}
+
+.icons-btn {
+  color: var(--secondary-baige);
+
+  &:hover {
+    color: var(--primary-baige);
+  }
 }
