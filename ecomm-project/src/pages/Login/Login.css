@@ -1,14 +1,8 @@
-.header {
+.login-header {
   color: var(--primary-baige);
   font-size: 5rem;
   text-align: center;
   padding: 30px;
-}
-.container {
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  width: 250px;
 }
 
 .using {
