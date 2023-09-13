@@ -24,7 +24,8 @@ const Header = () => {
       <Navbar expand="lg" className="bg-body-transparent">
         <Container fluid className="px-5">
           <Navbar.Brand
-            href="#"
+            as={Link}
+            to="/"
             className="secondary-baige-color"
             style={{ fontSize: "44px" }}
           >
@@ -47,7 +48,8 @@ const Header = () => {
                 Home
               </Nav.Link>
               <Nav.Link
-                href="#action2"
+                as={Link}
+                to="/products"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >

@@ -1,0 +1,48 @@
+.custom-card {
+  min-width: 150px;
+  background-color: var(--primary-baige);
+  border: 2px solid var(--secondary-baige);
+  max-width: 300px;
+  border-radius: 15px;
+  box-shadow: 4px 4px var(--secondary-baige);
+
+  &:hover {
+    box-shadow: none;
+    transition: 0.2s;
+  }
+}
+
+.product-img {
+  border-radius: 100%;
+  max-height: 250px;
+  max-width: 250px;
+  object-fit: cover;
+  border: 4px solid var(--secondary-baige);
+}
+
+.card-body {
+  color: #212529;
+}
+
+.card-title {
+  font-size: 28px;
+}
+
+.card-price {
+  color: #6dacc9;
+  font-size: 32px;
+}
+
+.add-to-cart-btn {
+  background-color: #6dacc9;
+  border: none;
+  width: 100%;
+  height: 50px;
+
+  &:hover {
+    background-color: transparent;
+    border: 2px solid #6dacc9;
+    color: #6dacc9;
+    transition: 0.3s;
+  }
+}
