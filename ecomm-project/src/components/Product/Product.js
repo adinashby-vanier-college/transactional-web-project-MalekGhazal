@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import "./Product.css";
 
 //Dummy data
 let imageurl =
@@ -8,42 +9,27 @@ let imageurl =
 let name = "Pants";
 let description =
   "These are some really great pants, I wear them all the time even in bed";
-let price = "50$";
+let price = "50.00$";
 
 function Product() {
   return (
-    <Card
-      className="bg-body-transparent p-4"
-      style={{
-        minWidth: "150px",
-        backgroundColor: "transparent",
-        border: "none",
-        maxWidth: "300px",
-      }}
-    >
-      <div className="d-flex justify-content-center align-items-center">
-        <Card.Img
-          variant="top"
-          src={imageurl}
-          style={{
-            borderRadius: "100%",
-            maxHeight: "250px",
-            maxWidth: "250px",
-            objectFit: "cover",
-          }}
-        />
-      </div>
-      <Card.Body className="secondary-baige-color">
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{price}</Card.Text>
-        <Card.Text>{description}</Card.Text>
-        <div className="text-center mt-3">
-          <Button className="login-btn" style={{ fontSize: "20px" }}>
-            Add to Cart
-          </Button>
+    <div className="container pt-5">
+      <Card className="p-4 custom-card">
+        <div className="d-flex justify-content-center align-items-center">
+          <Card.Img variant="top" src={imageurl} className="product-img" />
         </div>
-      </Card.Body>
-    </Card>
+        <Card.Body className="card-body">
+          <Card.Title className="card-title">{name}</Card.Title>
+          <Card.Text className="card-price">{price}</Card.Text>
+          <Card.Text className="card-text">{description}</Card.Text>
+          <div className="text-center mt-3">
+            <Button className="add-to-cart-btn" style={{ fontSize: "20px" }}>
+              Add to Cart
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
