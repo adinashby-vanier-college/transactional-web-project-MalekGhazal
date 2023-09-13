@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <>
       <Container fluid className="px-5">
-        <h1 className="header">Login</h1>
+        <h1 className="login-header">Login</h1>
 
         <div className="signupform">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
