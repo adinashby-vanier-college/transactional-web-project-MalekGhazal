@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./Product.css";
 
+const api_key = process.env.API_KEY;
 //Dummy data
 let imageurl =
   "https://images.pexels.com/photos/2897533/pexels-photo-2897533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
