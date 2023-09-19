@@ -4,11 +4,21 @@ const mongoose = require("mongoose");
 
 const app = express();
 
+var corsOptions = {
+  origin: "http://localhost:3000",
+};
+
 // Middleware / Cross-Origin
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4200;
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to ECOMM Backend." });
+});
+
+require("./app/routes/user.routes.js")(app);
 
 app.listen(PORT, () => {
   console.log("Server is running on port ${PORT}");
