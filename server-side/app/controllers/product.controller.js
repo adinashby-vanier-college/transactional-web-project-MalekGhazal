@@ -17,7 +17,6 @@ exports.create = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -29,7 +28,6 @@ exports.findAll = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -41,7 +39,6 @@ exports.findOne = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -64,7 +61,6 @@ exports.update = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -76,7 +72,6 @@ exports.delete = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
@@ -87,7 +82,6 @@ exports.deleteAll = (req, res) => {
       res.send(result);
     })
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 };
