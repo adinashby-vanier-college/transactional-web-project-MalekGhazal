@@ -4,6 +4,21 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
+app.use(express.json());
+
+//Database
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: process.env.DATABASE_NAME,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -11,16 +26,16 @@ var corsOptions = {
 
 // Middleware / Cross-Origin
 app.use(cors(corsOptions));
-app.use(express.json());
 
-const PORT = process.env.PORT || 4200;
-
+//Index Page
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to ECOMM Backend." });
 });
+//Router
+require("./app/routes/product.routes.js")(app);
 
-require("./app/routes/user.routes.js")(app);
-
+//Frontend use 3000
+const PORT = process.env.PORT || 4200;
 app.listen(PORT, () => {
   console.log("Server is running on port ${PORT}");
 });
