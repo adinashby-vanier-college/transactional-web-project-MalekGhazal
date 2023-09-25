@@ -4,14 +4,15 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
-app.use(express.json());
 
 //Database
 mongoose
   .connect(process.env.MONGODB_URI, {
+    dbName: process.env.DATABASE_NAME,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: process.env.DATABASE_NAME,
+    retryWrites: true,
+    w: "majority",
   })
   .then(() => {
     console.log("Connected to MongoDB");
@@ -25,6 +26,7 @@ var corsOptions = {
 };
 
 // Middleware / Cross-Origin
+app.use(express.json());
 app.use(cors(corsOptions));
 
 //Index Page
