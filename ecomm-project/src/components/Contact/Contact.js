@@ -4,7 +4,7 @@ import "./Contact.css";
 const Contact = () => {
   return (
     <>
-      <div id="contact-section" className="container py-4">
+      <section id="contact-section" className="container py-4">
         <h1 className="header text-center pb-3">Get in touch!</h1>
         <div className="about-border mt-0"></div>
 
@@ -50,7 +50,7 @@ const Contact = () => {
             </a>
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 };
