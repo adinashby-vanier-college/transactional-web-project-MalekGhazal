@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import HeroImage from "../../assets/Fashion-6.png";
 import "./Hero.css";
@@ -16,9 +15,15 @@ function Home() {
             <h2 className="font-italic" style={{ fontSize: "32px" }}>
               Where Fashion Dreams Come True
             </h2>
-            <Button className="login-btn p-2 mt-3" style={{ fontSize: "26px" }}>
-              Explore Now
-            </Button>
+            <div className="hero--button">
+              <a
+                href="/products"
+                className="login-btn p-2 mt-5 hero--link"
+                style={{ fontSize: "26px" }}
+              >
+                Explore Now
+              </a>
+            </div>
           </div>
           <div className="col-lg-8">
             <Image src={HeroImage} fluid />

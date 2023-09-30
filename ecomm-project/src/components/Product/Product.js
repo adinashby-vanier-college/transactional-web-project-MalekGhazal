@@ -11,6 +11,7 @@ let description =
 
 function Product() {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Product() {
           country: "us",
           lang: "en",
           currentpage: "0",
-          pagesize: "30",
+          pagesize: "12",
           categories: "men_all",
         },
         headers: {
@@ -35,7 +36,6 @@ function Product() {
         .request(options)
         .then((response) => {
           setProducts(response.data.results);
-          console.log(response.data.results);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -43,6 +43,10 @@ function Product() {
       isMounted.current = false;
     }
   }, []);
+
+  const filteredProducts = products.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -54,15 +58,17 @@ function Product() {
           class="input"
           name="text"
           type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
       <div className="row p-5">
-        {products.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <Card key={index} className="p-4 custom-card text-center">
             <div className="d-flex justify-content-center align-items-center">
               <Card.Img
                 variant="top"
-                src={product.images[0].baseUrl}
+                src={product.galleryImages[0].baseUrl}
                 className="product-img"
               />
             </div>

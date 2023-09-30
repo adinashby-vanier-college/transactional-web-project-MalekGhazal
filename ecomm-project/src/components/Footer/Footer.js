@@ -27,16 +27,24 @@ const Footer = () => {
               <h4>Company</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">About Us</a>
+                  <a href="#about-us-section" className="footer--link">
+                    About Us
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Contact Us</a>
+                  <a href="#contact-section" className="footer--link">
+                    Contact Us
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Our Team</a>
+                  <a href="#ourTeam" className="footer--link">
+                    Our Team
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Careers</a>
+                  <a href="#careers" className="footer--link">
+                    Careers
+                  </a>
                 </li>
               </ul>
             </div>
@@ -44,16 +52,24 @@ const Footer = () => {
               <h4>Policies</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">Privacy Policy</a>
+                  <a href="/privacy-policy" className="footer--link">
+                    Privacy Policy
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Terms & Conditions</a>
+                  <a href="/terms-conditions" className="footer--link">
+                    Terms & Coditions
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Refund Policy</a>
+                  <a href="/refund-policy" className="footer--link">
+                    Refund Policy
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Cookies</a>
+                  <a href="/cookies-policy" className="footer--link">
+                    Cookies
+                  </a>
                 </li>
               </ul>
             </div>
@@ -61,16 +77,24 @@ const Footer = () => {
               <h4>Social Media</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">Instagram</a>
+                  <a href="#instagram" className="footer--link">
+                    Instagram
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Facebook</a>
+                  <a href="#facebook" className="footer--link">
+                    Facebook
+                  </a>
                 </li>
                 <li>
-                  <a href="/">Twitter</a>
+                  <a href="#twitter" className="footer--link">
+                    Twitter
+                  </a>
                 </li>
                 <li>
-                  <a href="/">TikTok</a>
+                  <a href="#tiktok" className="footer--link">
+                    TikTok
+                  </a>
                 </li>
               </ul>
             </div>
