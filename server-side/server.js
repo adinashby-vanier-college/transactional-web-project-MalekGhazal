@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 });
 //Router
 require("./app/routes/product.routes.js")(app);
+require("./app/routes/cart.routes.js")(app);
 
 //Frontend use 3000
 const PORT = process.env.PORT || 4200;
