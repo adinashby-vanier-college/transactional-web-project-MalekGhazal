@@ -78,6 +78,7 @@
 .fav-icon {
   position: absolute;
   font-size: 30px;
+  color: var(--primary-blue);
 }
 
 .half_circle {

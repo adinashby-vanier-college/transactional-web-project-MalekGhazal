@@ -1,0 +1,10 @@
+.policy--content {
+  font-size: larger;
+  color: #212529;
+}
+
+.policy--content strong {
+  color: var(--secondary-baige);
+  font-weight: 500;
+  font-size: 30px;
+}
