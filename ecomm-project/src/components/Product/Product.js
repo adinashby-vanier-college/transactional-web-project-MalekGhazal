@@ -22,8 +22,8 @@ function Product() {
         params: {
           country: "us",
           lang: "en",
-          currentpage: "0",
-          pagesize: "12",
+          currentpage: "" + Math.floor(Math.random() * (12 + 1)),
+          pagesize: "30",
           categories: "men_all",
         },
         headers: {
@@ -36,6 +36,8 @@ function Product() {
         .request(options)
         .then((response) => {
           setProducts(response.data.results);
+          //use it only when you need to fetch many product records by HM api to database.
+          //saveProducts(response.data.results);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -48,6 +50,46 @@ function Product() {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Save products to database when refresh the product page every time!
+  const saveProducts = (products) => {
+    const newArray = products.map((product) => ({
+      _id: product.pk,
+      name: product.name,
+      img: product.galleryImages[0].baseUrl,
+      price: product.price.formattedValue,
+      category: product.categoryName,
+      description:
+        "These are some really great pants, I wear them all the time even in bed",
+      inStock: Math.floor(Math.random() * 200),
+    }));
+
+    console.log(newArray);
+
+    fetch("http://localhost:4200/product/insertMany", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: "Bearer YourAccessToken",
+      },
+      body: JSON.stringify(newArray),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the response data here
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the fetch
+        console.error("Fetch error:", error);
+      });
+
+    return newArray;
+  };
   return (
     <>
       <h1 className="header text-center pb-5">Collection</h1>
