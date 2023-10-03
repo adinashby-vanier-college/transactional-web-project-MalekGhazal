@@ -1,14 +1,16 @@
 const Product = require("../models/product.model.js");
 
 exports.create = (req, res) => {
-  const { _id, name, brand, price, category } = req.body;
+  const { _id, name, img, description, price, category, inStock } = req.body;
 
   const product = new Product({
     _id,
     name,
-    brand,
+    img,
+    description,
     price,
     category,
+    inStock,
   });
 
   product
@@ -18,6 +20,28 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json(err);
+    });
+};
+
+exports.insertMany = (req, res) => {
+  Product.find({}, "_id")
+    .then((existingIds) => {
+      // Convert the result to an array of _id values
+      const existingIdSet = new Set(existingIds.map((doc) => doc._id));
+
+      // Remove items from products data that exist in the database
+      const uniqueProductsData = req.body.filter(
+        (product) => !existingIdSet.has(product._id)
+      );
+
+      // Use insertMany with the remaining unique items
+      return Product.insertMany(uniqueProductsData);
+    })
+    .then((savedProducts) => {
+      console.log("Saved products:", savedProducts);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
 };
 
@@ -46,14 +70,16 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  const { name, brand, price, category } = req.body;
-  console.log(name);
+  const { _id, name, img, description, price, category, inStock } = req.body;
 
   const product = new Product({
+    _id,
     name,
-    brand,
+    img,
+    description,
     price,
     category,
+    inStock,
   });
 
   Product.findOneAndUpdate({ _id: id }, product, { new: true }) //new: true => return the modified document rather than the original. defaults to false

@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.get("/api", (req, res) => {
-//Index Page
+  //Index Page
   res.json({ message: "Welcome to ECOMM Backend." });
 });
 //Router
@@ -59,5 +59,5 @@ require("./app/routes/cart.routes.js")(app);
 //Frontend use 3000
 const PORT = process.env.PORT || 4200;
 app.listen(PORT, () => {
-  console.log("Server is running on port ${PORT}");
+  console.log(`Server is running on port ${PORT}`);
 });

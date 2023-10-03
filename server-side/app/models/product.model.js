@@ -5,23 +5,31 @@ const productSchema = new Schema(
   {
     //product id
     _id: {
-      type: Number,
+      type: String,
       required: true,
     },
     name: {
       type: String,
       required: true,
     },
-    brand: {
+    img: {
       type: String,
       required: true,
     },
     price: {
-      type: Number,
+      type: String,
       required: true,
     },
     category: {
       type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    inStock: {
+      type: Number,
       required: true,
     },
   },

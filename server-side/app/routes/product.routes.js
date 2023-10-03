@@ -6,6 +6,9 @@ module.exports = (app) => {
   // Create a new products
   router.post("/", products.create);
 
+  // Insert many products
+  router.post("/insertMany", products.insertMany);
+
   // Retrieve all products
   router.get("/", products.findAll);
 
