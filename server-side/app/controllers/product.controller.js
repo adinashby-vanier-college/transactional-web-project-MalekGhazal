@@ -60,7 +60,11 @@ exports.findOne = (req, res) => {
   const id = req.params.id;
   Product.findOne({ _id: id })
     .then((result) => {
-      res.send(result);
+      if (result) {
+        res.send(result);
+      } else {
+        res.status(404).send({ message: "No such product found" });
+      }
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -95,17 +99,11 @@ exports.delete = (req, res) => {
   const id = req.params.id;
   Product.findOneAndDelete({ _id: id })
     .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
-
-exports.deleteAll = (req, res) => {
-  Product.deleteMany({})
-    .then((result) => {
-      res.send(result);
+      if (result) {
+        res.send({ message: "Product deleted successfully" });
+      } else {
+        res.status(404).send({ message: "No product found to delete" });
+      }
     })
     .catch((err) => {
       res.status(400).json(err);
