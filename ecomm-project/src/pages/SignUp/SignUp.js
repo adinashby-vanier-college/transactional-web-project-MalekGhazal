@@ -6,8 +6,11 @@ import "./SignUp.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -15,18 +18,21 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const auth = getAuth();
+    await signOut(auth);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
         console.log("Succesfully created user");
-        // ...
+
+        // Should route somewhere here
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(error.message);
         // ..
       });
   };
@@ -86,7 +92,7 @@ const SignUp = () => {
           </Form>
         </div>
 
-        <h5 className="using">Or Sign up using</h5>
+        {/* <h5 className="using">Or Sign up using</h5>
         <div className="icons">
           <div className="box">
             <a href="#google" className="icons-btn">
@@ -99,7 +105,7 @@ const SignUp = () => {
               <i className="fab fa-twitter"></i>
             </a>
           </div>
-        </div>
+        </div> */}
       </Container>
     </>
   );
