@@ -6,18 +6,54 @@ import "./Login.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 const Login = () => {
-  const [validated, setValidated] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = getAuth();
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        //go to home page
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
-    setValidated(true);
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
   };
 
   return (
@@ -26,19 +62,33 @@ const Login = () => {
         <h1 className="login-header">Login</h1>
 
         <div className="signupform">
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <InputGroup className="group">
               <InputGroup.Text id="basic-addon1" className="icon">
                 <i className="fa-solid fa-user"></i>
               </InputGroup.Text>
               <Form.Control
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                className="input"
+                type="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </InputGroup>
+            <InputGroup className="group">
+              <InputGroup.Text id="basic-addon1" className="icon">
+                <i className="fa-sharp fa-solid fa-envelopes-bulk"></i>
+              </InputGroup.Text>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </InputGroup>
 
-            <InputGroup className="group">
+            {/* <InputGroup className="group">
               <InputGroup.Text id="basic-addon1" className="icon">
                 <i className="fa-solid fa-lock"></i>
               </InputGroup.Text>
@@ -47,7 +97,7 @@ const Login = () => {
                 aria-describedby="basic-addon1"
                 className="input"
               />
-            </InputGroup>
+            </InputGroup> */}
 
             <div className="textbox">
               <Link to="/signup" className="text">
@@ -64,10 +114,14 @@ const Login = () => {
           </Form>
         </div>
 
-        <h5 className="using">Or Sign up using</h5>
+        <h5 className="using">Log in or Sign up using</h5>
         <div className="icons">
           <div className="box">
-            <a href="#google" className="icons-btn">
+            <a
+              href="#google"
+              className="icons-btn"
+              onClick={handleGoogleSignIn}
+            >
               <i className="fa-brands fa-google"></i>
             </a>
             <a href="#facebook" className="icons-btn">
