@@ -1,98 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Pagination from "./Pagination";
 import "./Product.css";
-import axios from "axios";
-
-const api_key = process.env.REACT_APP_API_KEY;
-//Dummy data
-let description =
-  "These are some really great pants, I wear them all the time even in bed";
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
+  const [itemsPerPage, setItemsPerPage] = useState(12);
   const isMounted = useRef(true);
 
   useEffect(() => {
     if (isMounted.current) {
-      const options = {
-        method: "GET",
-        url: "https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list",
-        params: {
-          country: "us",
-          lang: "en",
-          currentpage: "" + Math.floor(Math.random() * (12 + 1)),
-          pagesize: "30",
-          categories: "men_all",
-        },
-        headers: {
-          "X-RapidAPI-Key": api_key,
-          "X-RapidAPI-Host": "apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
-        },
-      };
-
-      axios
-        .request(options)
-        .then((response) => {
-          setProducts(response.data.results);
-          //use it only when you need to fetch many product records by HM api to database.
-          //saveProducts(response.data.results);
+      fetch(`http://localhost:4200/product`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP Error! Status: ${res.status}`);
+          }
+          return res.json();
         })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
+        .then((data) => {
+          setProducts(data);
+        })
+        .catch((err) => {
+          console.log("Error fetching data:" + err);
         });
+
       isMounted.current = false;
     }
   }, []);
 
-  const filteredProducts = products.filter((item) =>
+  const lastItemIndex = currentPage * itemsPerPage;
+  const firstItemIndex = lastItemIndex - itemsPerPage;
+  const currentItems = products.slice(firstItemIndex, lastItemIndex);
+
+  const filteredProducts = currentItems.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Save products to database when refresh the product page every time!
-  const saveProducts = (products) => {
-    const newArray = products.map((product) => ({
-      _id: product.pk,
-      name: product.name,
-      img: product.galleryImages[0].baseUrl,
-      price: product.price.formattedValue,
-      category: product.categoryName,
-      description:
-        "These are some really great pants, I wear them all the time even in bed",
-      inStock: Math.floor(Math.random() * 200),
-    }));
-
-    console.log(newArray);
-
-    fetch("http://localhost:4200/product/insertMany", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: "Bearer YourAccessToken",
-      },
-      body: JSON.stringify(newArray),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Handle the response data here
-        console.log(data);
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the fetch
-        console.error("Fetch error:", error);
-      });
-
-    return newArray;
-  };
   return (
     <>
-      <h1 className="header text-center pb-5">Collection</h1>
+      <h1 className="header text-center pb-5 collections--header">
+        Collection
+      </h1>
       <div class="InputContainer mx-auto">
         <input
           placeholder="Search.."
@@ -104,37 +56,47 @@ function Product() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="row p-5">
-        {filteredProducts.map((product, index) => (
-          <Card key={index} className="p-4 custom-card text-center">
-            <div className="d-flex justify-content-center align-items-center">
-              <Card.Img
-                variant="top"
-                src={product.galleryImages[0].baseUrl}
-                className="product-img"
-              />
-            </div>
-            <a href="#like" className="fav-icon">
-              <i class="fa-regular fa-heart"></i>
-            </a>
-            <div class="half_circle"></div>
-            <Card.Body className="card-body">
-              <Card.Title className="card-title">{product.name}</Card.Title>
-              <Card.Text className="card-price">
-                {product.price.formattedValue}
-              </Card.Text>
-              <Card.Text className="custom-card-text">{description}</Card.Text>
-              <div>
-                <Button
-                  className="add-to-cart-btn"
-                  style={{ fontSize: "20px" }}
-                >
-                  Add to Cart
-                </Button>
+      <div className="container-fluid">
+        <div className="row p-5">
+          {filteredProducts.map((product, index) => (
+            <Card key={index} className="p-4 custom-card text-center">
+              <div className="d-flex justify-content-center align-items-center">
+                <Card.Img
+                  variant="top"
+                  src={product.img}
+                  className="product-img"
+                />
               </div>
-            </Card.Body>
-          </Card>
-        ))}
+              <a href="#like" className="fav-icon">
+                <i class="fa-regular fa-heart"></i>
+              </a>
+              <div class="half_circle"></div>
+              <Card.Body className="card-body">
+                <Card.Title className="card-title">{product.name}</Card.Title>
+                <Card.Text className="card-price">{product.price}</Card.Text>
+                <Card.Text className="custom-card-text">
+                  {product.description}
+                </Card.Text>
+                <div>
+                  <Button
+                    className="add-to-cart-btn"
+                    style={{ fontSize: "20px" }}
+                  >
+                    Add to Cart
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+      </div>
+      <div>
+        <Pagination
+          totalItems={products.length}
+          productsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
     </>
   );

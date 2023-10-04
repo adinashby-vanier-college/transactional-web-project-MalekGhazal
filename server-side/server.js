@@ -8,6 +8,10 @@ dotenv.config();
 
 const app = express();
 
+// Middleware / Cross-Origin
+app.use(express.json());
+app.use(cors());
+
 //Database
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -24,6 +28,14 @@ mongoose
     console.log(err);
   });
 
+app.get("/api", (req, res) => {
+  //Index Page
+  res.json({ message: "Welcome to ECOMM Backend." });
+});
+//Router
+require("./app/routes/product.routes.js")(app);
+require("./app/routes/cart.routes.js")(app);
+
 const _dirman = path.dirname("");
 const buildPath = path.join(_dirman, "../ecomm-project/build");
 
@@ -39,22 +51,6 @@ app.get("*", function (req, res) {
     }
   );
 });
-
-var corsOptions = {
-  origin: "http://localhost:3000",
-};
-
-// Middleware / Cross-Origin
-app.use(express.json());
-app.use(cors(corsOptions));
-
-app.get("/api", (req, res) => {
-  //Index Page
-  res.json({ message: "Welcome to ECOMM Backend." });
-});
-//Router
-require("./app/routes/product.routes.js")(app);
-require("./app/routes/cart.routes.js")(app);
 
 //Frontend use 3000
 const PORT = process.env.PORT || 4200;

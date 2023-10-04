@@ -6,9 +6,9 @@
   padding-top: 8.5rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   .title {
-    font-size: 76px;
+    font-size: 60px;
   }
 }
 
