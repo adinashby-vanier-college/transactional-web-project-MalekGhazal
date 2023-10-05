@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const Header = () => {
   const scrollToAboutUs = () => {
@@ -85,6 +86,21 @@ const Header = () => {
               style={{ fontSize: "20px" }}
             >
               LOGIN
+            </Nav.Link>
+            <Nav.Link
+              href="#"
+              className="login-btn"
+              style={{ fontSize: "20px" }}
+              onClick={async () => {
+                try {
+                  await auth.signOut();
+                  console.log("User signed out");
+                } catch (error) {
+                  console.error("Error signing out:", error);
+                }
+              }}
+            >
+              LOGOUT
             </Nav.Link>
           </Navbar.Collapse>
         </Container>
