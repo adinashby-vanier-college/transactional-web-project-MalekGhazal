@@ -12,26 +12,29 @@ import Refund from "./pages/Policies/Refund";
 import Cookies from "./pages/Policies/Cookies";
 import Terms from "./pages/Policies/Terms";
 import NotFound from "./pages/404/404";
+import { CartProvider } from "../src/components/Cart/CartContext";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/products" element={<Product />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/refund-policy" element={<Refund />} />
-          <Route path="/cookies-policy" element={<Cookies />} />
-          <Route path="/terms-conditions" element={<Terms />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/products" element={<Product />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<Refund />} />
+            <Route path="/cookies-policy" element={<Cookies />} />
+            <Route path="/terms-conditions" element={<Terms />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

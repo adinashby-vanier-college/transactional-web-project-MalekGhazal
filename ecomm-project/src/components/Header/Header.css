@@ -1,0 +1,27 @@
+.cart-count {
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(235, 44, 44);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.cart--icon {
+  position: relative;
+}
+
+.wishlist--icon:hover {
+  color: rgb(133, 25, 25);
+  transition: 0.3s;
+}
+
+.cart--icon:hover {
+  color: var(--primary-baige);
+  transition: 0.3s;
+}

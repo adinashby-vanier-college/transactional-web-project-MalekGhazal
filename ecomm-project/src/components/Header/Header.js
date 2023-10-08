@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { auth } from "../../firebase";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { useCart } from "../Cart/CartContext";
+import "./Header.css";
 
 const Header = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [navExpanded, setNavExpanded] = useState(false);
+  const auth = getAuth();
+  const cart = useCart();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+      } else {
+        setCurrentUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
+  const closeNav = () => {
+    setNavExpanded(false);
+  };
+
   const scrollToAboutUs = () => {
     const aboutUsSection = document.getElementById("about-us-section");
     if (aboutUsSection) {
@@ -22,7 +47,12 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-transparent">
+      <Navbar
+        expand="lg"
+        className="bg-body-transparent"
+        expanded={navExpanded}
+        onToggle={(expanded) => setNavExpanded(expanded)}
+      >
         <Container fluid className="px-5">
           <Navbar.Brand
             as={Link}
@@ -34,7 +64,7 @@ const Header = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav">
             <i
-              class="fa-solid fa-bars secondary-baige-color"
+              className="fa-solid fa-bars secondary-baige-color"
               style={{ fontSize: "30px" }}
             ></i>
           </Navbar.Toggle>
@@ -45,6 +75,7 @@ const Header = () => {
                 to="/"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
+                onClick={closeNav}
               >
                 Home
               </Nav.Link>
@@ -53,12 +84,16 @@ const Header = () => {
                 to="/products"
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
+                onClick={closeNav}
               >
                 Products
               </Nav.Link>
               <Nav.Link
                 href="#about"
-                onClick={scrollToAboutUs}
+                onClick={(e) => {
+                  scrollToAboutUs();
+                  closeNav();
+                }}
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
@@ -66,42 +101,63 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link
                 href="#contact"
-                onClick={scrollToContact}
+                onClick={(e) => {
+                  scrollToContact();
+                  closeNav();
+                }}
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
                 Contact
               </Nav.Link>
             </Nav>
-            <a href="#cart">
+            <Nav.Link as={Link} to="/wishlist" onClick={closeNav}>
               <i
-                className="fa-solid fa-cart-shopping secondary-baige-color mx-3"
+                className="fa-solid fa-heart secondary-baige-color wishlist--icon"
                 style={{ fontSize: "24px" }}
               ></i>
-            </a>
-            <Nav.Link
-              as={Link}
-              to="/login"
-              className="login-btn"
-              style={{ fontSize: "20px" }}
-            >
-              LOGIN
             </Nav.Link>
-            <Nav.Link
-              href="#"
-              className="login-btn"
-              style={{ fontSize: "20px" }}
-              onClick={async () => {
-                try {
-                  await auth.signOut();
-                  console.log("User signed out");
-                } catch (error) {
-                  console.error("Error signing out:", error);
-                }
-              }}
-            >
-              LOGOUT
+
+            <Nav.Link as={Link} to="/cart" onClick={closeNav}>
+              <i
+                className="fa-solid fa-cart-shopping secondary-baige-color mx-3 cart--icon"
+                style={{ fontSize: "24px" }}
+              >
+                {cart.length > 0 && (
+                  <span className="cart-count">{cart.length}</span>
+                )}
+              </i>
             </Nav.Link>
+
+            {currentUser ? (
+              <>
+                <Nav.Link
+                  as={Link}
+                  to="/"
+                  className="login-btn"
+                  style={{ fontSize: "20px" }}
+                  onClick={async () => {
+                    try {
+                      await signOut(auth);
+                      console.log("User signed out");
+                    } catch (error) {
+                      console.error("Error signing out:", error);
+                    }
+                  }}
+                >
+                  LOGOUT
+                </Nav.Link>
+              </>
+            ) : (
+              <Nav.Link
+                as={Link}
+                to="/login"
+                className="login-btn"
+                style={{ fontSize: "20px" }}
+              >
+                LOGIN
+              </Nav.Link>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
