@@ -150,3 +150,18 @@
     height: 48px;
   }
 }
+
+/* Notification Popup */
+
+.notification-popup {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background-color: var(--secondary-baige);
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+  border-radius: 8px;
+  transition: 0.3s ease;
+  z-index: 1000;
+}
