@@ -25,3 +25,43 @@
   color: var(--primary-baige);
   transition: 0.3s;
 }
+
+.welcome--username {
+  background-color: var(--secondary-baige);
+  border-radius: 12px;
+  padding: 0.575rem;
+  margin-right: 0.3rem;
+
+  > h5 {
+    color: var(--primary-blue);
+  }
+}
+
+.collapsing {
+  transition: height 0.5s ease;
+}
+
+@media (max-width: 1050px) {
+  .welcome--username {
+    > h5 {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .welcome--username {
+    display: none;
+  }
+
+  .nav--icons {
+    display: inline-flex;
+  }
+
+  .login-btn {
+    margin-top: 1rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
