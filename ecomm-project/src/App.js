@@ -17,6 +17,7 @@ import Cart from "./components/Cart/Cart";
 import Wishlist from "./components/Wishlist/Wishlist";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -76,6 +77,7 @@ function App() {
                 path="/wishlist"
                 element={<Wishlist currentUser={currentUser} />}
               />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
           )}
