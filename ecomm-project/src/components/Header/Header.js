@@ -8,10 +8,12 @@ import { auth } from "../../firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useCart } from "../Cart/CartContext";
 import "./Header.css";
+import { getDoc, getFirestore, doc } from "@firebase/firestore";
 
 const Header = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [navExpanded, setNavExpanded] = useState(false);
+  const [username, setUsername] = useState(null);
   const auth = getAuth();
   const cart = useCart();
 
@@ -30,6 +32,21 @@ const Header = () => {
   const closeNav = () => {
     setNavExpanded(false);
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      const fetchUsername = async () => {
+        const db = getFirestore();
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          setUsername(userSnap.data().username);
+        }
+      };
+      fetchUsername();
+    }
+  }, [currentUser]);
 
   const scrollToAboutUs = () => {
     const aboutUsSection = document.getElementById("about-us-section");
@@ -111,14 +128,24 @@ const Header = () => {
                 Contact
               </Nav.Link>
             </Nav>
-            <Nav.Link as={Link} to="/wishlist" onClick={closeNav}>
+            <Nav.Link
+              as={Link}
+              to={currentUser ? "/wishlist" : "/login"}
+              onClick={closeNav}
+              className="nav--icons"
+            >
               <i
                 className="fa-solid fa-heart secondary-baige-color wishlist--icon"
                 style={{ fontSize: "24px" }}
               ></i>
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/cart" onClick={closeNav}>
+            <Nav.Link
+              as={Link}
+              to={currentUser ? "/cart" : "/login"}
+              onClick={closeNav}
+              className="nav--icons"
+            >
               <i
                 className="fa-solid fa-cart-shopping secondary-baige-color mx-3 cart--icon"
                 style={{ fontSize: "24px" }}
@@ -131,6 +158,9 @@ const Header = () => {
 
             {currentUser ? (
               <>
+                <div className="welcome--username">
+                  <h5 className="my-auto">Welcome {username}</h5>
+                </div>
                 <Nav.Link
                   as={Link}
                   to="/"
@@ -139,6 +169,7 @@ const Header = () => {
                   onClick={async () => {
                     try {
                       await signOut(auth);
+                      window.location.reload();
                       console.log("User signed out");
                     } catch (error) {
                       console.error("Error signing out:", error);
