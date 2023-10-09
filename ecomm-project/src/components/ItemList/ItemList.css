@@ -1,0 +1,21 @@
+.itemlist-box {
+  /* Set a specific width for the <td> element */
+  width: 80px;
+  /* Adjust the width as needed */
+}
+.itemlist-img {
+  border-radius: 100%;
+  width: 100%;
+  object-fit: cover;
+  border: 3px solid var(--primary-blue);
+}
+
+.operations{width: 110px;}
+
+.icon-edit-color {
+  color: var(--primary-blue);
+}
+
+.icon-delete-color {
+  color: red;
+}
