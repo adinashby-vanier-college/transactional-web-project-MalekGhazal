@@ -33,6 +33,7 @@
 .icon {
   background-color: var(--secondary-baige);
   color: var(--secondary-blue);
+  width: 15%;
 }
 .icons {
   display: flex;
@@ -61,18 +62,16 @@
   }
 }
 
-.box {
-  width: 290px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 70px;
-  font-size: 1.5rem;
-}
-
-.icons-btn {
-  color: var(--secondary-baige);
+.google-btn {
+  background-color: var(--secondary-baige);
+  color: var(--secondary-blue);
+  border: 0;
+  width: 300px;
+  justify-content: space-evenly;
+  margin-top: 20px;
 
   &:hover {
+    background-color: var(--secondary-blue);
     color: var(--primary-baige);
   }
 }

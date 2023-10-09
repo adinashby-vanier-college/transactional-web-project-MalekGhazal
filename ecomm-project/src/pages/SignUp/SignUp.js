@@ -5,19 +5,49 @@ import Button from "react-bootstrap/Button";
 import "./SignUp.css";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const SignUp = () => {
-  const [validated, setValidated] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const auth = getAuth();
+  const db = getFirestore();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signOut(auth);
 
-    setValidated(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+
+        try {
+          await setDoc(doc(db, "users", user.uid), {
+            username: username,
+            email: email,
+            cart: [],
+            wishlist: [],
+          });
+          console.log("Succesfully created user and saved in Firestore");
+        } catch (error) {
+          console.error("Error storing user data in Firestore: ", error);
+        }
+        // Redirect to Login Page
+        navigate("/login");
+      })
+      .catch((error) => {
+        alert(error.message);
+        // ..
+      });
   };
 
   return (
@@ -26,35 +56,44 @@ const SignUp = () => {
         <h1 className="login-header">Sign Up</h1>
 
         <div className="signupform">
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <InputGroup className="group">
               <InputGroup.Text id="basic-addon1" className="icon">
                 <i className="fa-solid fa-user"></i>
               </InputGroup.Text>
               <Form.Control
                 aria-label="Username"
+                placeholder="Username"
                 aria-describedby="basic-addon1"
                 className="input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </InputGroup>
             <InputGroup className="group">
               <InputGroup.Text id="basic-addon1" className="icon">
-                <i className="fa-sharp fa-solid fa-envelopes-bulk"></i>
+                <i className="fa-solid fa-envelopes-bulk"></i>
               </InputGroup.Text>
               <Form.Control
-                aria-label="Username"
-                aria-describedby="basic-addon1"
                 className="input"
+                type="email"
+                placeholder="Email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </InputGroup>
             <InputGroup className="group">
               <InputGroup.Text id="basic-addon1" className="icon">
-                <i className="fa-solid fa-lock"></i>
+                <i className="fa-sharp fa-solid fa-lock"></i>
               </InputGroup.Text>
               <Form.Control
-                aria-label="Username"
-                aria-describedby="basic-addon1"
                 className="input"
+                type="password"
+                placeholder="Password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </InputGroup>
 
@@ -69,21 +108,6 @@ const SignUp = () => {
               S I G N &nbsp; U P
             </Button>
           </Form>
-        </div>
-
-        <h5 className="using">Or Sign up using</h5>
-        <div className="icons">
-          <div className="box">
-            <a href="#google" className="icons-btn">
-              <i className="fa-brands fa-google"></i>
-            </a>
-            <a href="#facebook" className="icons-btn">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#twitter" className="icons-btn">
-              <i className="fab fa-twitter"></i>
-            </a>
-          </div>
         </div>
       </Container>
     </>

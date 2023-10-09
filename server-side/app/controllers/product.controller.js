@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
       if (result) {
         res.send(result);
       } else {
-        res.status(404).send({ message: 'No such product found' });
+        res.status(404).send({ message: "No such product found" });
       }
     })
     .catch((err) => {
@@ -100,13 +100,12 @@ exports.delete = (req, res) => {
   Product.findOneAndDelete({ _id: id })
     .then((result) => {
       if (result) {
-        res.send({ message: 'Product deleted successfully' });
+        res.send({ message: "Product deleted successfully" });
       } else {
-        res.status(404).send({ message: 'No product found to delete' });
+        res.status(404).send({ message: "No product found to delete" });
       }
     })
     .catch((err) => {
       res.status(400).json(err);
     });
 };
-
