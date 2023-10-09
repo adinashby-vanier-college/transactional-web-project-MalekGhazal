@@ -14,7 +14,6 @@ import Terms from "./pages/Policies/Terms";
 import NotFound from "./pages/404/404";
 import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
-import Wishlist from "./components/Wishlist/Wishlist";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -71,10 +70,6 @@ function App() {
               <Route
                 path="/cart"
                 element={<Cart currentUser={currentUser} />}
-              />
-              <Route
-                path="/wishlist"
-                element={<Wishlist currentUser={currentUser} />}
               />
               <Route path="/*" element={<NotFound />} />
             </Routes>
