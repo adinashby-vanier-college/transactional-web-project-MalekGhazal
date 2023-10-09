@@ -16,11 +16,6 @@
   position: relative;
 }
 
-.wishlist--icon:hover {
-  color: rgb(133, 25, 25);
-  transition: 0.3s;
-}
-
 .cart--icon:hover {
   color: var(--primary-baige);
   transition: 0.3s;
@@ -63,5 +58,28 @@
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+.InputContainer {
+  position: relative;
+}
+
+.input {
+  padding-right: 40px;
+}
+
+.favorite-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--primary-blue);
+  font-size: 20px;
+
+  &:hover {
+    color: rgb(163, 47, 47);
+    transition: 0.5s;
   }
 }

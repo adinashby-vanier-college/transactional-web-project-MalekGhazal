@@ -128,17 +128,6 @@ const Header = () => {
                 Contact
               </Nav.Link>
             </Nav>
-            <Nav.Link
-              as={Link}
-              to={currentUser ? "/wishlist" : "/login"}
-              onClick={closeNav}
-              className="nav--icons"
-            >
-              <i
-                className="fa-solid fa-heart secondary-baige-color wishlist--icon"
-                style={{ fontSize: "24px" }}
-              ></i>
-            </Nav.Link>
 
             <Nav.Link
               as={Link}
