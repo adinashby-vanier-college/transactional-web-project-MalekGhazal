@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Admin from "./pages/Admin/Admin";
 import SignUp from "./pages/SignUp/SignUp";
 import Product from "./components/Product/Product";
 import PrivacyPolicy from "./pages/Policies/PrivacyPolicy";
@@ -67,6 +68,7 @@ function App() {
               <Route path="/refund-policy" element={<Refund />} />
               <Route path="/cookies-policy" element={<Cookies />} />
               <Route path="/terms-conditions" element={<Terms />} />
+              <Route path="/admin" element={<Admin />} />
               <Route
                 path="/cart"
                 element={<Cart currentUser={currentUser} />}
