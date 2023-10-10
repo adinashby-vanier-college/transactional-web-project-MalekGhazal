@@ -1,11 +1,10 @@
 import React from "react";
-import ItemList from "../../components/ItemList/ItemList";
-const Admin = () => {
-  return (
-    <div>
-      <ItemList />
-    </div>
-  );
-};
 
-export default Admin;
+import ItemListComponent from "../../components/ItemList/ItemList";
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+function ItemList() {
+  return <ItemListComponent />;
+}
+
+export default ItemList;

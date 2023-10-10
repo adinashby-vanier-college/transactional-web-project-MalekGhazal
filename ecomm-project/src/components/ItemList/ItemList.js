@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Table, Button } from "react-bootstrap";
-// import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import "./ItemList.css";
 import Card from "react-bootstrap/Card";
@@ -24,21 +23,32 @@ function ItemListComponent() {
   const navigateToDetail = (itemId) => {
     navigate(`/item/${itemId}`);
   };
-  const navigateToDelete = (itemId) => {
-    navigate(`/item/${itemId}`);
+
+  const navigateToDelete = (productId) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      // The user clicked "OK" (Yes), perform the delete action here
+      Axios.delete(`http://localhost:4200/product/${productId}`).then(
+        (response) => {
+          window.location.reload();
+        } // refresh the page
+      );
+    } else {
+      // The user clicked "Cancel" (No) or closed the dialog
+      // You can handle the cancel action here or do nothing
+    }
   };
   const navigateToAddItem = () => {
-    navigate("/addItem");
+    navigate(`/admin/addProduct`);
   };
   const navigateToUpdate = (itemId) => {
-    navigate(`/updateItem/${itemId}`);
+    navigate(`/admin/updateProduct/${itemId}`);
   };
 
   return (
     <div className="ItemList my-4">
       <Container>
-        <Button variant="info" className="my-5" onClick={navigateToAddItem}>
-          Add Item
+        <Button className="my-5 addItem-btn" onClick={navigateToAddItem}>
+          Add Product
         </Button>
         <Row className="justify-content-md-center">
           <Table bordered hover>
@@ -59,14 +69,14 @@ function ItemListComponent() {
             <tbody>
               {itemList.map((val, index) => (
                 <tr key={index}>
-                  <td className="itemlist-box d-flex justify-content-center align-items-center">
-                    <Card.Img
-                      variant="top"
-                      src={val.img}
-                      // width={80}
-                      height={62.4}
-                      className="itemlist-img"
-                    />
+                  <td className="td-box">
+                    <div className="image-container ">
+                      <img
+                        src={val.img}
+                        alt={val.name}
+                        className=" itemlist-img"
+                      />
+                    </div>
                   </td>
                   <td>{val._id}</td>
                   <td>{val.name}</td>
@@ -80,12 +90,12 @@ function ItemListComponent() {
                   <td className="justify-content-md-center">
                     <i
                       className="bi bi-pencil-square icon-edit-color"
-                      onClick={() => navigateToUpdate(val.itemId)}
+                      onClick={() => navigateToUpdate(val._id)}
                     ></i>{" "}
                     ||{" "}
                     <i
                       className="bi bi-trash3-fill icon-delete-color"
-                      onClick={() => navigateToDelete(val.itemId)}
+                      onClick={() => navigateToDelete(val._id)}
                     ></i>{" "}
                     {/* ||{" "}
                     <i

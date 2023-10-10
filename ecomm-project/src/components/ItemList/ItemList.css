@@ -1,11 +1,13 @@
-.itemlist-box {
-  /* Set a specific width for the <td> element */
-  width: 80px;
-  /* Adjust the width as needed */
-}
+
+
+
+
 .itemlist-img {
   border-radius: 100%;
   width: 100%;
+  height: 100%;
+  max-width: 100px;
+
   object-fit: cover;
   border: 3px solid var(--primary-blue);
 }
@@ -14,8 +16,32 @@
 
 .icon-edit-color {
   color: var(--primary-blue);
+
+  cursor: pointer;
+
 }
 
 .icon-delete-color {
   color: red;
+
+  cursor: pointer;
+}
+
+.addItem-btn{
+    background-color: #6dacc9;
+      border: none;
+      /* width: 60%;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      right: 0; */
+      border-radius: 15px ;
+    
+      &:hover {
+        background-color: transparent;
+        border: 2px solid #6dacc9;
+        color: white;
+        /* transition: 0.3s; */
+      }
+
 }
