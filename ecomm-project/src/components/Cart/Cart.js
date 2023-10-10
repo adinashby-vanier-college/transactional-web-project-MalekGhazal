@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import "./Cart.css";
+import image from "../../assets/Fashion-7.png";
 
 const Cart = ({ currentUser }) => {
   const [items, setItems] = useState([]);
@@ -39,7 +40,13 @@ const Cart = ({ currentUser }) => {
     <>
       <div className="cart--section">
         <h2 className="cart--header container-fluid">Your Items</h2>
-        {items &&
+        {items.length === 0 ? (
+          <div className="container">
+            <h4 className="text-center text-white">Your cart is empty.</h4>
+            <img className="w-10 img-fluid" src={image} alt="" />
+          </div>
+        ) : (
+          items &&
           items.length > 0 &&
           items.map((item, index) => (
             <div key={index} className="cart--item">
@@ -61,7 +68,8 @@ const Cart = ({ currentUser }) => {
                 </a>
               </div>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </>
   );
