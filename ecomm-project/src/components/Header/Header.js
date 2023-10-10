@@ -16,6 +16,7 @@ const Header = () => {
   const [username, setUsername] = useState(null);
   const auth = getAuth();
   const cart = useCart();
+  const firstName = username ? username.split(" ")[0] : "";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -148,7 +149,7 @@ const Header = () => {
             {currentUser ? (
               <>
                 <div className="welcome--username">
-                  <h5 className="my-auto">Welcome {username}</h5>
+                  <h5 className="my-auto">Welcome {firstName}</h5>
                 </div>
                 <Nav.Link
                   as={Link}
