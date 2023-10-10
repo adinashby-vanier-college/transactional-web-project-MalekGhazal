@@ -17,7 +17,6 @@ import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Admin from "./pages/Admin/Admin";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
