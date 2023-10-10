@@ -16,6 +16,7 @@ import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -67,6 +68,7 @@ function App() {
               <Route path="/refund-policy" element={<Refund />} />
               <Route path="/cookies-policy" element={<Cookies />} />
               <Route path="/terms-conditions" element={<Terms />} />
+              <Route path="/admin" element={<Admin />} />
               <Route
                 path="/cart"
                 element={<Cart currentUser={currentUser} />}
