@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Admin from "./pages/Admin/Admin";
 import SignUp from "./pages/SignUp/SignUp";
 import Product from "./components/Product/Product";
 import PrivacyPolicy from "./pages/Policies/PrivacyPolicy";
@@ -16,7 +17,6 @@ import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Admin from "./pages/Admin/Admin";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
