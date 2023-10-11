@@ -4,7 +4,6 @@ import { Container, Row, Table, Button } from "react-bootstrap";
 // import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import "./ItemList.css";
-import Card from "react-bootstrap/Card";
 
 function ItemListComponent() {
   const [itemList, setItemList] = useState([]);
@@ -38,10 +37,10 @@ function ItemListComponent() {
     }
   };
   const navigateToAddItem = () => {
-    navigate(`/admin/addProduct`);
+    navigate(`/admin/addProduct/0`);
   };
   const navigateToUpdate = (itemId) => {
-    navigate(`/admin/updateProduct/${itemId}`);
+    navigate(`/admin/addProduct/${itemId}`);
   };
 
   return (
