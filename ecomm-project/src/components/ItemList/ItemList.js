@@ -9,11 +9,12 @@ import "../Product/Pagination.css";
 
 function ItemListComponent() {
   const [itemList, setItemList] = useState([]);
+
   const navigate = useNavigate();
 
   //Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -70,7 +71,7 @@ function ItemListComponent() {
         </Button>
         <div className="InputContainer mx-auto my-3">
           <input
-            placeholder="Search.."
+            placeholder="Search by name "
             id="input"
             className="input"
             name="text"
@@ -109,7 +110,9 @@ function ItemListComponent() {
                   </td>
                   <td>{val._id}</td>
                   <td>{val.name}</td>
-                  <td>{val.price}</td>
+                  <td>
+                    {val.price.startsWith("$ ") ? val.price : "$  " + val.price}
+                  </td>
                   <td>{val.category}</td>
                   <td>{val.description}</td>
                   <td>{val.inStock}</td>
