@@ -3,7 +3,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
-
 dotenv.config();
 
 const app = express();
@@ -28,13 +27,11 @@ mongoose
     console.log(err);
   });
 
-app.get("/api", (req, res) => {
-  //Index Page
-  res.json({ message: "Welcome to ECOMM Backend." });
-});
 //Router
+app.get("/api/", (req, res) => {
+  res.send("Hello World!");
+});
 require("./app/routes/product.routes.js")(app);
-require("./app/routes/cart.routes.js")(app);
 
 const _dirman = path.dirname("");
 const buildPath = path.join(_dirman, "../ecomm-project/build");

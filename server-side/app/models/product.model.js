@@ -12,11 +12,7 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    img: {
-      type: String,
-      required: true,
-    },
-    price: {
+    description: {
       type: String,
       required: true,
     },
@@ -24,12 +20,16 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
+    price: {
       type: String,
       required: true,
     },
     inStock: {
       type: Number,
+      required: true,
+    },
+    img: {
+      type: String,
       required: true,
     },
   },
