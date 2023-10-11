@@ -4,10 +4,10 @@ import Login from "../Login/Login";
 import {
   getFirestore,
   doc,
-  setDoc,
+  // setDoc,
   getDoc,
-  arrayUnion,
-  arrayRemove,
+  // arrayUnion,
+  // arrayRemove,
 } from "firebase/firestore";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -16,7 +16,7 @@ const auth = getAuth();
 
 function Admin() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -27,20 +27,20 @@ function Admin() {
           setCurrentUser({ ...user, ...userDocData.data() });
 
           // Check if user is an admin
-          if (userDocData && userDocData.role === "admin") {
-            // User is an admin, allow access to ItemListComponent
-            setIsAdmin(true);
-          } else {
-            // User is not an admin, prevent access and redirect to Login
-            setIsAdmin(false);
-          }
+          // if (userDocData && userDocData.role === "admin") {
+          //   // User is an admin, allow access to ItemListComponent
+          //   setIsAdmin(true);
+          // } else {
+          //   // User is not an admin, prevent access and redirect to Login
+          //   setIsAdmin(false);
+          // }
         }
       } else {
         setCurrentUser(null);
       }
     });
     return () => unsubscribe();
-  }, [auth, db]);
+  }, []);
 
   console.log(currentUser);
 
