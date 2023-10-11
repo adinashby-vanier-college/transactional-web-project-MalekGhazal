@@ -18,6 +18,12 @@ import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import PaymentSuccess from "./components/Payments/PaymentSuccess";
+import PaymentCancelled from "./components/Payments/PaymentCancelled";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -44,44 +50,51 @@ function App() {
   }, [auth]);
 
   return (
-    <CartProvider>
-      <Router>
-        <div className="App">
-          <Header />
-          {loading ? (
-            <div className="loader-container">
-              <div className="wrapper">
-                <div className="circle"></div>
-                <div className="circle"></div>
-                <div className="circle"></div>
-                <div className="shadow"></div>
-                <div className="shadow"></div>
-                <div className="shadow"></div>
+    <Elements stripe={stripe}>
+      <CartProvider>
+        <Router>
+          <div className="App">
+            <Header />
+            {loading ? (
+              <div className="loader-container">
+                <div className="wrapper">
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="shadow"></div>
+                  <div className="shadow"></div>
+                  <div className="shadow"></div>
+                </div>
               </div>
-            </div>
-          ) : (
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/products" element={<Product />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/refund-policy" element={<Refund />} />
-              <Route path="/cookies-policy" element={<Cookies />} />
-              <Route path="/terms-conditions" element={<Terms />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/addProduct/:id" element={<AddProduct />} />
-              <Route
-                path="/cart"
-                element={<Cart currentUser={currentUser} />}
-              />
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-          )}
-          <Footer />
-        </div>
-      </Router>
-    </CartProvider>
+            ) : (
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/products" element={<Product />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/refund-policy" element={<Refund />} />
+                <Route path="/cookies-policy" element={<Cookies />} />
+                <Route path="/terms-conditions" element={<Terms />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route
+                  path="/payment-cancelled"
+                  element={<PaymentCancelled />}
+                />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/addProduct/:id" element={<AddProduct />} />
+                <Route
+                  path="/cart"
+                  element={<Cart currentUser={currentUser} />}
+                />
+                <Route path="/*" element={<NotFound />} />
+              </Routes>
+            )}
+            <Footer />
+          </div>
+        </Router>
+      </CartProvider>
+    </Elements>
   );
 }
 

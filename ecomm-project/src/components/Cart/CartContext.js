@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { getFirestore, doc, onSnapshot } from "firebase/firestore";
+import { getFirestore, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const CartContext = createContext();
@@ -32,8 +32,22 @@ export const CartProvider = ({ children }) => {
     return () => unsubscribeAuth();
   }, [auth, db]);
 
+  const clearCart = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userDoc = doc(db, "users", user.uid);
+      try {
+        await updateDoc(userDoc, {
+          cart: [],
+        });
+      } catch (error) {
+        console.error("Error clearing the cart:", error);
+      }
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ cart, numberOfItems }}>
+    <CartContext.Provider value={{ cart, numberOfItems, clearCart }}>
       {children}
     </CartContext.Provider>
   );

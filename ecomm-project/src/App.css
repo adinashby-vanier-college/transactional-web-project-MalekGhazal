@@ -55,7 +55,7 @@ body {
   &:hover {
     background-color: var(--secondary-baige);
     color: var(--primary-blue);
-    border: none;
+    border: 1px solid var(--secondary-baige);
   }
 }
 
