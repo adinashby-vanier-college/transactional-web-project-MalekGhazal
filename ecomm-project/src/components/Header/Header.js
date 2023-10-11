@@ -176,6 +176,7 @@ const Header = () => {
                 to="/login"
                 className="login-btn"
                 style={{ fontSize: "20px" }}
+                onClick={closeNav}
               >
                 LOGIN
               </Nav.Link>

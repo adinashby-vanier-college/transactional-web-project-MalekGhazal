@@ -3,6 +3,9 @@ import { Navigate } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import "./Cart.css";
 import image from "../../assets/Fashion-7.png";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const Cart = ({ currentUser }) => {
   const [items, setItems] = useState([]);
@@ -84,6 +87,41 @@ const Cart = ({ currentUser }) => {
     return items.reduce((acc, item) => acc + item.quantity, 0);
   };
 
+  const checkout = async () => {
+    try {
+      const cartData = items.map((item) => ({
+        name: item.name,
+        price: item.price.replace(/[^0-9.]/g, ""),
+        quantity: item.quantity,
+      }));
+
+      const response = await fetch(
+        "http://localhost:4200/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ cart: cartData }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Server responded with a ${response.status} status.`);
+      }
+
+      const { sessionId } = await response.json();
+
+      const result = await stripe.redirectToCheckout({ sessionId });
+
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error("There was an issue with the checkout:", error.message);
+    }
+  };
+
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
@@ -156,7 +194,9 @@ const Cart = ({ currentUser }) => {
         <p className="number--of--items mb-0">
           No. of items: {numberOfItems()}
         </p>
-        <button className="checkout--btn">Checkout</button>
+        <button onClick={checkout} className="checkout--btn">
+          Checkout
+        </button>
       </div>
     </>
   );

@@ -3,12 +3,16 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
+const bodyParser = require("body-parser");
+
 dotenv.config();
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const app = express();
 
 // Middleware / Cross-Origin
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 //Database
@@ -26,6 +30,36 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+app.post("/create-checkout-session", async (req, res) => {
+  const cart = req.body.cart;
+
+  const lineItems = cart.map((item) => ({
+    price_data: {
+      currency: "usd",
+      product_data: {
+        name: item.name,
+      },
+      unit_amount: Math.round(item.price * 100),
+    },
+    quantity: item.quantity,
+  }));
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: "http://localhost:3000/payment-success",
+      cancel_url: "http://localhost:3000/payment-cancelled",
+    });
+
+    res.json({ sessionId: session.id });
+  } catch (err) {
+    console.error("Stripe session creation failed:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 //Router
 app.get("/api/", (req, res) => {
