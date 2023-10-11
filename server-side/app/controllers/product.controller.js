@@ -1,16 +1,16 @@
 const Product = require("../models/product.model.js");
 
 exports.create = (req, res) => {
-  const { _id, name, img, description, price, category, inStock } = req.body;
+  const { _id, name, description, category, price, inStock, img } = req.body;
 
   const product = new Product({
     _id,
     name,
-    img,
     description,
-    price,
     category,
+    price,
     inStock,
+    img,
   });
 
   product
@@ -74,6 +74,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
+  //You can decide wether the _id is allowed to be updated or not, here id = _id
   const { _id, name, img, description, price, category, inStock } = req.body;
 
   const product = new Product({

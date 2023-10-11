@@ -19,9 +19,9 @@ function ItemListComponent() {
       });
   }, []);
 
-  const navigateToDetail = (itemId) => {
-    navigate(`/item/${itemId}`);
-  };
+  // const navigateToDetail = (itemId) => {
+  //   navigate(`/item/${itemId}`);
+  // };
 
   const navigateToDelete = (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
