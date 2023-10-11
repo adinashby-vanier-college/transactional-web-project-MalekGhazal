@@ -7,6 +7,7 @@ import {
   getFirestore,
   doc,
   setDoc,
+  getDoc,
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
@@ -16,6 +17,7 @@ import "./Product.css";
 function Product() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showFavorite, setShowFavorite] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentUser, setCurrentUser] = useState(null);
   // eslint-disable-next-line no-unused-vars
@@ -27,11 +29,19 @@ function Product() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocData = await getDoc(userDocRef);
+        if (userDocData.exists()) {
+          setCurrentUser({ ...user, ...userDocData.data() });
+        }
+      } else {
+        setCurrentUser(null);
+      }
     });
     return () => unsubscribe();
-  }, [auth]);
+  }, [auth, db]);
 
   const showNotification = (message) => {
     setNotification(message);
@@ -43,9 +53,35 @@ function Product() {
       navigate("/login");
       return;
     }
-    const userDoc = doc(db, "users", currentUser.uid);
-    await setDoc(userDoc, { cart: arrayUnion(product) }, { merge: true });
-    showNotification("Added to cart successfully!");
+
+    const userDocRef = doc(db, "users", currentUser.uid);
+    const userDocData = await getDoc(userDocRef);
+
+    if (userDocData.exists()) {
+      const cartItems = userDocData.data().cart || [];
+      let updatedCartItems = [];
+
+      // Check if product already exists in cart
+      const existingCartItemIndex = cartItems.findIndex(
+        (item) => item._id === product._id
+      );
+
+      if (existingCartItemIndex > -1) {
+        // If product exists, update its quantity
+        const existingCartItem = cartItems[existingCartItemIndex];
+        existingCartItem.quantity += 1;
+        updatedCartItems = [...cartItems];
+      } else {
+        // If product doesn't exist, add it with quantity = 1
+        const productWithQuantity = { ...product, quantity: 1 };
+        updatedCartItems = [...cartItems, productWithQuantity];
+      }
+
+      // Update the cart in Firestore
+      await setDoc(userDocRef, { cart: updatedCartItems }, { merge: true });
+
+      showNotification("Added to cart successfully!");
+    }
   };
 
   const handleWishlist = async (product) => {
@@ -55,16 +91,28 @@ function Product() {
     }
     const userDoc = doc(db, "users", currentUser.uid);
 
-    if (currentUser.wishlist?.includes(product.id)) {
+    const isProductInWishlist = currentUser.wishlist?.some(
+      (wish) => wish._id === product._id
+    );
+
+    if (isProductInWishlist) {
       await setDoc(
         userDoc,
         { wishlist: arrayRemove(product) },
         { merge: true }
       );
-      showNotification("Removed from wishlsit successfully!");
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        wishlist: prevUser.wishlist.filter((wish) => wish._id !== product._id),
+      }));
+      showNotification("Removed from wishlist successfully!");
     } else {
       await setDoc(userDoc, { wishlist: arrayUnion(product) }, { merge: true });
-      showNotification("Added to wishlsit successfully!");
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        wishlist: [...prevUser.wishlist, product],
+      }));
+      showNotification("Added to wishlist successfully!");
     }
   };
 
@@ -92,9 +140,15 @@ function Product() {
   const firstItemIndex = lastItemIndex - itemsPerPage;
   const currentItems = products.slice(firstItemIndex, lastItemIndex);
 
-  const filteredProducts = currentItems.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = currentItems
+    .filter((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter(
+      (item) =>
+        !showFavorite ||
+        currentUser?.wishlist?.some((wish) => wish._id === item._id)
+    );
 
   return (
     <>
@@ -112,7 +166,18 @@ function Product() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <a
+          href="#favorite-filter"
+          className="favorite-icon"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowFavorite(!showFavorite);
+          }}
+        >
+          <i className="fa-solid fa-heart"></i>
+        </a>
       </div>
+
       <div className="container-fluid">
         <div className="row p-5">
           {filteredProducts.map((product, index) => (
@@ -131,7 +196,9 @@ function Product() {
               >
                 <i
                   className={
-                    currentUser?.wishlist?.includes(product.id)
+                    currentUser?.wishlist?.some(
+                      (wish) => wish._id === product._id
+                    )
                       ? "fa-solid fa-heart"
                       : "fa-regular fa-heart"
                   }

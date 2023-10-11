@@ -15,7 +15,9 @@ const Header = () => {
   const [navExpanded, setNavExpanded] = useState(false);
   const [username, setUsername] = useState(null);
   const auth = getAuth();
-  const cart = useCart();
+  // eslint-disable-next-line no-unused-vars
+  const { cart, numberOfItems } = useCart();
+  const firstName = username ? username.split(" ")[0] : "";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -128,17 +130,6 @@ const Header = () => {
                 Contact
               </Nav.Link>
             </Nav>
-            <Nav.Link
-              as={Link}
-              to={currentUser ? "/wishlist" : "/login"}
-              onClick={closeNav}
-              className="nav--icons"
-            >
-              <i
-                className="fa-solid fa-heart secondary-baige-color wishlist--icon"
-                style={{ fontSize: "24px" }}
-              ></i>
-            </Nav.Link>
 
             <Nav.Link
               as={Link}
@@ -150,8 +141,8 @@ const Header = () => {
                 className="fa-solid fa-cart-shopping secondary-baige-color mx-3 cart--icon"
                 style={{ fontSize: "24px" }}
               >
-                {cart.length > 0 && (
-                  <span className="cart-count">{cart.length}</span>
+                {numberOfItems() > 0 && (
+                  <span className="cart-count">{numberOfItems()}</span>
                 )}
               </i>
             </Nav.Link>
@@ -159,7 +150,7 @@ const Header = () => {
             {currentUser ? (
               <>
                 <div className="welcome--username">
-                  <h5 className="my-auto">Welcome {username}</h5>
+                  <h5 className="my-auto">Welcome {firstName}</h5>
                 </div>
                 <Nav.Link
                   as={Link}

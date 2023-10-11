@@ -5,6 +5,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import Admin from "./pages/Admin/Admin";
+import AddProduct from "./pages/AddProduct/AddProduct";
 import SignUp from "./pages/SignUp/SignUp";
 import Product from "./components/Product/Product";
 import PrivacyPolicy from "./pages/Policies/PrivacyPolicy";
@@ -14,7 +16,6 @@ import Terms from "./pages/Policies/Terms";
 import NotFound from "./pages/404/404";
 import { CartProvider } from "../src/components/Cart/CartContext";
 import Cart from "./components/Cart/Cart";
-import Wishlist from "./components/Wishlist/Wishlist";
 import React, { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -68,13 +69,11 @@ function App() {
               <Route path="/refund-policy" element={<Refund />} />
               <Route path="/cookies-policy" element={<Cookies />} />
               <Route path="/terms-conditions" element={<Terms />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/addProduct/:id" element={<AddProduct />} />
               <Route
                 path="/cart"
                 element={<Cart currentUser={currentUser} />}
-              />
-              <Route
-                path="/wishlist"
-                element={<Wishlist currentUser={currentUser} />}
               />
               <Route path="/*" element={<NotFound />} />
             </Routes>

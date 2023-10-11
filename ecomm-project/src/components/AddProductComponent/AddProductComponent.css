@@ -1,0 +1,51 @@
+.add-product-title{
+  text-align: center;
+  color:var(--primary-blue);
+  padding: 10px 0;
+}
+
+.submit-product-btn {
+  background-color: #6dacc9;
+  border: none;
+  /* width: 60%;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      right: 0; */
+  border-radius: 15px;
+
+  &:hover {
+    background-color: transparent;
+    border: 2px solid #6dacc9;
+    color: #6dacc9;
+    /* transition: 0.3s; */
+  }
+}
+
+.cancel-product-btn{
+  background-color: transparent;
+    border: 2px solid #6dacc9;
+    color: #6dacc9;
+
+    
+      /* width: 60%;
+          height: 50px;
+          position: absolute;
+          bottom: 0;
+          right: 0; */
+      border-radius: 15px;
+    
+      &:hover {
+        background-color: #6dacc9;
+        color: white;
+          border: none;
+        /* transition: 0.3s; */
+      }
+}
+
+.form-row{
+  width: 400px;
+  padding: 0 auto;
+
+
+}
