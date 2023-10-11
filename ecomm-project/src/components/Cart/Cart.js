@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import "./Cart.css";
 import image from "../../assets/Fashion-7.png";
 
@@ -32,6 +32,58 @@ const Cart = ({ currentUser }) => {
     };
   }, [currentUser]);
 
+  const updateCartInFirestore = async (updatedCart) => {
+    try {
+      const db = getFirestore();
+      const cartRef = doc(db, "users", currentUser.uid);
+      await updateDoc(cartRef, { cart: updatedCart });
+    } catch (err) {
+      console.log("Error updating the cart in Firestore: ", err);
+    }
+  };
+
+  const handleIncrement = async (index) => {
+    const newItems = [...items];
+    newItems[index].quantity += 1;
+
+    setItems(newItems);
+    await updateCartInFirestore(newItems);
+  };
+
+  const handleDecrement = async (index) => {
+    const newItems = [...items];
+    if (newItems[index].quantity > 1) {
+      newItems[index].quantity -= 1;
+    } else {
+      newItems.splice(index, 1);
+    }
+
+    setItems(newItems);
+    await updateCartInFirestore(newItems);
+  };
+
+  const handleDelete = async (index) => {
+    const newItems = [...items];
+    newItems.splice(index, 1);
+
+    setItems(newItems);
+    await updateCartInFirestore(newItems);
+  };
+
+  const cartTotal = () => {
+    return items
+      .map((item) => {
+        const priceString = item.price.replace(/[^0-9.]/g, "");
+        return parseFloat(priceString * item.quantity);
+      })
+      .reduce((acc, curr) => acc + curr, 0)
+      .toFixed(2);
+  };
+
+  const numberOfItems = () => {
+    return items.reduce((acc, item) => acc + item.quantity, 0);
+  };
+
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
@@ -46,30 +98,65 @@ const Cart = ({ currentUser }) => {
             <img className="w-10 img-fluid" src={image} alt="" />
           </div>
         ) : (
-          items &&
-          items.length > 0 &&
           items.map((item, index) => (
             <div key={index} className="cart--item">
-              <div className="cart--img--container">
-                <img className="cart--img" src={item.img} alt="" />
-              </div>
-              <p className="cart--item--title">{item.name}</p>
-              <p className="cart--item--desc">{item.description}</p>
-              <p className="cart--item--price">{item.price}</p>
-              <div className="cart--item--btns">
-                <a href="#increment" className="cart--item-plus">
-                  <i className="fa-solid fa-plus"></i>
-                </a>
-                <a href="#decrement" className="cart--item-minus">
-                  <i className="fa-solid fa-minus"></i>
-                </a>
-                <a href="#delete" className="cart--item--delete">
-                  <i className="fa-solid fa-trash"></i>
-                </a>
+              <img className="cart--img" src={item.img} alt="" />
+              <div className="cart--item--details">
+                <p className="cart--item--title">{item.name}</p>
+                <p className="cart--item--desc">{item.description}</p>
+                <p className="cart--item--price">{item.price}</p>
+                <div className="cart--item--btns">
+                  <div className="cart--item--icons--circle text-center">
+                    <a
+                      href="#increment"
+                      className="cart--item-plus"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleIncrement(index);
+                      }}
+                    >
+                      <i className="fa-solid fa-plus"></i>
+                    </a>
+                  </div>
+                  <div className="cart--item--icons--circle text-center">
+                    <a
+                      href="#decrement"
+                      className="cart--item-minus"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDecrement(index);
+                      }}
+                    >
+                      <i className="fa-solid fa-minus"></i>
+                    </a>
+                  </div>
+                  <div className="cart--item--icons--circle text-center">
+                    <a
+                      href="#delete"
+                      className="cart--item--delete"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDelete(index);
+                      }}
+                    >
+                      <i className="fa-solid fa-xmark"></i>
+                    </a>
+                  </div>
+                </div>
+                <div className="product--quantity mt-3">
+                  Quantity: {item.quantity}
+                </div>
               </div>
             </div>
           ))
         )}
+      </div>
+      <div className="cart--checkout container">
+        <p className="total--price mb-0">Total: $ {cartTotal()}</p>
+        <p className="number--of--items mb-0">
+          No. of items: {numberOfItems()}
+        </p>
+        <button className="checkout--btn">Checkout</button>
       </div>
     </>
   );

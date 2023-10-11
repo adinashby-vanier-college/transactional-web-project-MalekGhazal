@@ -16,14 +16,15 @@
 
 .description {
   color: var(--secondary-baige);
-  padding-top: 3rem;
   font-size: 25px;
   font-weight: 400;
   line-height: 2.3rem;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 990px) {
   .description {
-    font-size: 20px; /* Adjust this value as needed */
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
   }
 }

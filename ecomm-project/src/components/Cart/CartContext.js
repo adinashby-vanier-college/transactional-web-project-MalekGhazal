@@ -9,6 +9,10 @@ export const CartProvider = ({ children }) => {
   const auth = getAuth();
   const db = getFirestore();
 
+  const numberOfItems = () => {
+    return cart.reduce((acc, item) => acc + item.quantity, 0);
+  };
+
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -28,7 +32,11 @@ export const CartProvider = ({ children }) => {
     return () => unsubscribeAuth();
   }, [auth, db]);
 
-  return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={{ cart, numberOfItems }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export const useCart = () => {

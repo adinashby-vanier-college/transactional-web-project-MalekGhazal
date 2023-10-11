@@ -15,7 +15,8 @@ const Header = () => {
   const [navExpanded, setNavExpanded] = useState(false);
   const [username, setUsername] = useState(null);
   const auth = getAuth();
-  const cart = useCart();
+  // eslint-disable-next-line no-unused-vars
+  const { cart, numberOfItems } = useCart();
   const firstName = username ? username.split(" ")[0] : "";
 
   useEffect(() => {
@@ -140,8 +141,8 @@ const Header = () => {
                 className="fa-solid fa-cart-shopping secondary-baige-color mx-3 cart--icon"
                 style={{ fontSize: "24px" }}
               >
-                {cart.length > 0 && (
-                  <span className="cart-count">{cart.length}</span>
+                {numberOfItems() > 0 && (
+                  <span className="cart-count">{numberOfItems()}</span>
                 )}
               </i>
             </Nav.Link>
