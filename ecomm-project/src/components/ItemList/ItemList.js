@@ -4,10 +4,17 @@ import { Container, Row, Table, Button } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import "./ItemList.css";
+import Pagination from "../Product/Pagination";
+import "../Product/Pagination.css";
 
 function ItemListComponent() {
   const [itemList, setItemList] = useState([]);
   const navigate = useNavigate();
+
+  //Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:4200/product/")
@@ -43,12 +50,35 @@ function ItemListComponent() {
     navigate(`/admin/addProduct/${itemId}`);
   };
 
+  const lastItemIndex = currentPage * itemsPerPage;
+  const firstItemIndex = lastItemIndex - itemsPerPage;
+  const currentItems = itemList.slice(firstItemIndex, lastItemIndex);
+
+  const filteredItemList = currentItems.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // .filter(
+  //   (item) =>!showFavorite ||
+  //     currentUser?.wishlist?.some((wish) => wish._id === item._id)
+  // );
+
   return (
     <div className="ItemList my-4">
       <Container>
-        <Button className="my-5 addItem-btn" onClick={navigateToAddItem}>
+        <Button className="my-2 addItem-btn" onClick={navigateToAddItem}>
           Add Product
         </Button>
+        <div className="InputContainer mx-auto my-3">
+          <input
+            placeholder="Search.."
+            id="input"
+            className="input"
+            name="text"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
         <Row className="justify-content-md-center">
           <Table bordered hover>
             <thead>
@@ -66,7 +96,7 @@ function ItemListComponent() {
               </tr>
             </thead>
             <tbody>
-              {itemList.map((val, index) => (
+              {filteredItemList.map((val, index) => (
                 <tr key={index}>
                   <td className="td-box">
                     <div className="image-container ">
@@ -107,6 +137,14 @@ function ItemListComponent() {
             </tbody>
           </Table>
         </Row>
+        <div>
+          <Pagination
+            totalItems={itemList.length}
+            productsPerPage={itemsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        </div>
       </Container>
     </div>
   );
