@@ -53,9 +53,35 @@ function Product() {
       navigate("/login");
       return;
     }
-    const userDoc = doc(db, "users", currentUser.uid);
-    await setDoc(userDoc, { cart: arrayUnion(product) }, { merge: true });
-    showNotification("Added to cart successfully!");
+
+    const userDocRef = doc(db, "users", currentUser.uid);
+    const userDocData = await getDoc(userDocRef);
+
+    if (userDocData.exists()) {
+      const cartItems = userDocData.data().cart || [];
+      let updatedCartItems = [];
+
+      // Check if product already exists in cart
+      const existingCartItemIndex = cartItems.findIndex(
+        (item) => item._id === product._id
+      );
+
+      if (existingCartItemIndex > -1) {
+        // If product exists, update its quantity
+        const existingCartItem = cartItems[existingCartItemIndex];
+        existingCartItem.quantity += 1;
+        updatedCartItems = [...cartItems];
+      } else {
+        // If product doesn't exist, add it with quantity = 1
+        const productWithQuantity = { ...product, quantity: 1 };
+        updatedCartItems = [...cartItems, productWithQuantity];
+      }
+
+      // Update the cart in Firestore
+      await setDoc(userDocRef, { cart: updatedCartItems }, { merge: true });
+
+      showNotification("Added to cart successfully!");
+    }
   };
 
   const handleWishlist = async (product) => {

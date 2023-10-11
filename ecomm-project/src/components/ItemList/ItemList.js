@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Container, Row, Table, Button } from "react-bootstrap";
-import "bootstrap-icons/font/bootstrap-icons.css";
+// import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import "./ItemList.css";
 
