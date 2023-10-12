@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
+import { FormattedMessage } from "react-intl";
 import HeroImage from "../../assets/Fashion-6.png";
 import "./Hero.css";
 
@@ -10,10 +11,10 @@ function Home() {
         <div className="row h-100">
           <div className="col-lg-4 secondary-baige-color align-items-center custom-centered-div">
             <h1 style={{ fontSize: "52px", marginTop: "20vh" }}>
-              Elevate Your Style
+              <FormattedMessage id="hero_title" />
             </h1>
             <h2 className="font-italic" style={{ fontSize: "32px" }}>
-              Where Fashion Dreams Come True
+              <FormattedMessage id="hero_desc" />
             </h2>
             <div className="hero--button">
               <a
@@ -21,7 +22,7 @@ function Home() {
                 className="login-btn p-2 mt-5 hero--link"
                 style={{ fontSize: "26px" }}
               >
-                Explore Now
+                <FormattedMessage id="hero_explore" />
               </a>
             </div>
           </div>
