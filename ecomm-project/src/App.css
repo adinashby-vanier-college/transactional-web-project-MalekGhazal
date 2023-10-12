@@ -35,6 +35,16 @@ body {
   color: var(--secondary-baige);
 }
 
+::selection {
+  background-color: var(--primary-baige);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--primary-baige);
+  color: white;
+}
+
 .login-btn {
   background: none;
   border: 1px solid var(--primary-baige);
@@ -45,7 +55,7 @@ body {
   &:hover {
     background-color: var(--secondary-baige);
     color: var(--primary-blue);
-    border: none;
+    border: 1px solid var(--secondary-baige);
   }
 }
 

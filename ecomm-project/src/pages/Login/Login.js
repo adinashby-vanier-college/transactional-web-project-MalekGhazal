@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
@@ -11,13 +10,44 @@ import {
   signInWithEmailAndPassword,
   signInWithRedirect,
   GoogleAuthProvider,
+  getRedirectResult,
 } from "firebase/auth";
+import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
+  const db = getFirestore();
+
+  useEffect(() => {
+    const checkRedirectResult = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+
+        if (result.user) {
+          const userRef = doc(db, "users", result.user.uid);
+          const userSnapshot = await getDoc(userRef);
+
+          if (!userSnapshot.exists()) {
+            await setDoc(userRef, {
+              uid: result.user.uid,
+              username: result.user.displayName,
+              email: result.user.email,
+              cart: [],
+              wishlist: [],
+            });
+          }
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error after returning from redirect auth:", error);
+      }
+    };
+
+    checkRedirectResult();
+  }, [auth, db, navigate]);
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
@@ -33,7 +63,7 @@ const Login = () => {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithRedirect(auth, provider);
-      navigate("/");
+      // The result will be handled by getRedirectResult() in the useEffect above.
     } catch (error) {
       alert(error.message);
     }

@@ -16,7 +16,9 @@ const Header = (props) => {
   const [navExpanded, setNavExpanded] = useState(false);
   const [username, setUsername] = useState(null);
   const auth = getAuth();
-  const cart = useCart();
+  // eslint-disable-next-line no-unused-vars
+  const { cart, numberOfItems } = useCart();
+  const firstName = username ? username.split(" ")[0] : "";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -155,8 +157,8 @@ const Header = (props) => {
                 className="fa-solid fa-cart-shopping secondary-baige-color mx-3 cart--icon"
                 style={{ fontSize: "24px" }}
               >
-                {cart.length > 0 && (
-                  <span className="cart-count">{cart.length}</span>
+                {numberOfItems() > 0 && (
+                  <span className="cart-count">{numberOfItems()}</span>
                 )}
               </i>
             </Nav.Link>
@@ -165,7 +167,7 @@ const Header = (props) => {
               <>
                 <div className="welcome--username">
                   <h5 className="my-auto">
-                    <FormattedMessage id="header_welcome" /> {username}
+                    <FormattedMessage id="header_welcome" /> {firstName}
                   </h5>
                 </div>
                 <Nav.Link
@@ -192,6 +194,7 @@ const Header = (props) => {
                 to="/login"
                 className="login-btn"
                 style={{ fontSize: "20px" }}
+                onClick={closeNav}
               >
                 <FormattedMessage id="header_login" />
               </Nav.Link>
