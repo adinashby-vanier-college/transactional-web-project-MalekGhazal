@@ -1,24 +1,27 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import "./Contact.css";
 
 const Contact = () => {
   return (
     <>
       <section id="contact-section" className="container py-4">
-        <h1 className="header text-center pb-3">Get in touch!</h1>
+        <h1 className="header text-center pb-3">
+          <FormattedMessage id="contact_title" />
+        </h1>
         <div className="about-border mt-0"></div>
 
         <form id="contactForm">
           <div className="mb-3">
             <label className="form-label custom-label" htmlFor="name">
-              Name
+              <FormattedMessage id="contact_name" />
             </label>
             <input required className="form-control" id="name" type="text" />
           </div>
 
           <div className="mb-3">
             <label className="form-label custom-label" htmlFor="emailAddress">
-              Email Address
+              <FormattedMessage id="contact_email" />
             </label>
             <input
               required
@@ -30,7 +33,7 @@ const Contact = () => {
 
           <div className="mb-3">
             <label className="form-label custom-label" htmlFor="message">
-              Message
+              <FormattedMessage id="contact_message" />
             </label>
             <textarea
               required
@@ -44,7 +47,9 @@ const Contact = () => {
           <div className="d-grid">
             <a className="fancy" href="#submit">
               <span className="top-key"></span>
-              <span className="text">Submit</span>
+              <span className="text">
+                <FormattedMessage id="contact_submit" />
+              </span>
               <span className="bottom-key-1"></span>
               <span className="bottom-key-2"></span>
             </a>

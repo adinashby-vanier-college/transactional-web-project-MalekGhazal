@@ -9,8 +9,9 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useCart } from "../Cart/CartContext";
 import "./Header.css";
 import { getDoc, getFirestore, doc } from "@firebase/firestore";
+import { FormattedMessage } from "react-intl";
 
-const Header = () => {
+const Header = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [navExpanded, setNavExpanded] = useState(false);
   const [username, setUsername] = useState(null);
@@ -96,7 +97,7 @@ const Header = () => {
                 style={{ fontSize: "22px", marginRight: "20px" }}
                 onClick={closeNav}
               >
-                Home
+                <FormattedMessage id="header_home" />
               </Nav.Link>
               <Nav.Link
                 as={Link}
@@ -105,7 +106,7 @@ const Header = () => {
                 style={{ fontSize: "22px", marginRight: "20px" }}
                 onClick={closeNav}
               >
-                Products
+                <FormattedMessage id="header_products" />
               </Nav.Link>
               <Nav.Link
                 href="#about"
@@ -116,7 +117,7 @@ const Header = () => {
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
-                About Us
+                <FormattedMessage id="header_aboutUs" />
               </Nav.Link>
               <Nav.Link
                 href="#contact"
@@ -127,9 +128,24 @@ const Header = () => {
                 className="secondary-baige-color"
                 style={{ fontSize: "22px", marginRight: "20px" }}
               >
-                Contact
+                <FormattedMessage id="header_contact" />
               </Nav.Link>
             </Nav>
+
+            {/* locales */}
+            <div className="spacer"></div>
+            <div className="switcher">
+              {/* Language switch dropdown here */}
+              {/* Languages{" "} */}
+              <select
+                className="language-switcher"
+                onChange={props.handleChange}
+                value={props.currentLocale}
+              >
+                <option value="en-US">EN</option>
+                <option value="fr-FR">FR</option>
+              </select>
+            </div>
 
             <Nav.Link
               as={Link}
@@ -150,7 +166,9 @@ const Header = () => {
             {currentUser ? (
               <>
                 <div className="welcome--username">
-                  <h5 className="my-auto">Welcome {firstName}</h5>
+                  <h5 className="my-auto">
+                    <FormattedMessage id="header_welcome" /> {firstName}
+                  </h5>
                 </div>
                 <Nav.Link
                   as={Link}
@@ -167,7 +185,7 @@ const Header = () => {
                     }
                   }}
                 >
-                  LOGOUT
+                  <FormattedMessage id="header_logout" />
                 </Nav.Link>
               </>
             ) : (
@@ -178,7 +196,7 @@ const Header = () => {
                 style={{ fontSize: "20px" }}
                 onClick={closeNav}
               >
-                LOGIN
+                <FormattedMessage id="header_login" />
               </Nav.Link>
             )}
           </Navbar.Collapse>

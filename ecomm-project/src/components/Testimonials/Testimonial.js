@@ -1,5 +1,6 @@
 import React from "react";
 import "./Testimonials.css";
+import { FormattedMessage } from "react-intl";
 import image1 from "../../assets/test-1.jpg";
 import image2 from "../../assets/test-2.jpg";
 import image3 from "../../assets/test-3.jpg";
@@ -16,7 +17,9 @@ const Testimonial = () => {
         ></path>
       </svg>
       <div style={{ backgroundColor: "#F1F0E8" }}>
-        <h1 className="title text-center pb-5">Testimonials</h1>
+        <h1 className="title text-center pb-5">
+          <FormattedMessage id="testimonials_title" />
+        </h1>
         <div className="border"></div>
 
         <div className="row m-0 container mx-auto">
@@ -34,10 +37,7 @@ const Testimonial = () => {
 
               <p>
                 <span>"</span>
-                I've never been so impressed with an online clothing store. The
-                selection is amazing, and the quality of the clothes is
-                top-notch. My wardrobe has never looked better, thanks to your
-                website!
+                <FormattedMessage id="testimonials_joe" />
                 <span>"</span>
               </p>
             </div>
@@ -58,10 +58,7 @@ const Testimonial = () => {
 
               <p>
                 <span>"</span>
-                I'm a fashion enthusiast, and I'm always on the lookout for
-                trendy pieces. Your e-commerce website is a hidden gem! I've
-                found unique styles here that I couldn't find anywhere else.
-                Keep up the fantastic work!
+                <FormattedMessage id="testimonials_emily" />
                 <span>"</span>
               </p>
             </div>
@@ -82,10 +79,7 @@ const Testimonial = () => {
 
               <p>
                 <span>"</span>
-                As a guy who's not into shopping, your website has made it
-                incredibly easy for me to update my wardrobe. The user-friendly
-                interface and curated collections make shopping a breeze. I'm a
-                loyal customer now!
+                <FormattedMessage id="testimonials_michael" />
                 <span>"</span>
               </p>
             </div>
@@ -106,10 +100,7 @@ const Testimonial = () => {
 
               <p>
                 <span>"</span>
-                Your fashion e-commerce site is a fashionista's dream come true.
-                The variety of clothing and accessories is impressive. I've
-                received so many compliments on the outfits I've bought here.
-                I'm in love with your store!
+                <FormattedMessage id="testimonials_sophia" />
                 <span>"</span>
               </p>
             </div>
