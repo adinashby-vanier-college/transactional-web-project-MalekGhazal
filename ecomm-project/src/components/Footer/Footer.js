@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { FormattedMessage } from "react-intl";
 
 const Footer = () => {
   return (
@@ -15,85 +16,98 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3 col-6">
-              <h4>Location</h4>
+              <h4>
+                <FormattedMessage id="footer_location" />
+              </h4>
               <ul className="list-unstyled">
                 <li>Canada</li>
-                <li>Quebec</li>
-                <li>Montreal</li>
+                <li>
+                  <FormattedMessage id="footer_quebec" />
+                </li>
+                <li>
+                  <FormattedMessage id="footer_montreal" />
+                </li>
+
                 <li>J8X 5V9</li>
               </ul>
             </div>
             <div className="col-md-3 col-6">
-              <h4>Company</h4>
+              <h4>
+                <FormattedMessage id="footer_company" />
+              </h4>
               <ul className="list-unstyled">
                 <li>
                   <a href="#about-us-section" className="footer--link">
-                    About Us
+                    <FormattedMessage id="header_aboutUs" />
                   </a>
                 </li>
                 <li>
                   <a href="#contact-section" className="footer--link">
-                    Contact Us
+                    <FormattedMessage id="header_contact" />
                   </a>
                 </li>
                 <li>
                   <a href="#ourTeam" className="footer--link">
-                    Our Team
+                    <FormattedMessage id="footer_ourTeam" />
                   </a>
                 </li>
                 <li>
                   <a href="#careers" className="footer--link">
-                    Careers
+                    <FormattedMessage id="footer_carrers" />
                   </a>
                 </li>
               </ul>
             </div>
             <div className="col-md-3 col-6">
-              <h4>Policies</h4>
+              <h4>
+                <FormattedMessage id="footer_policies" />
+              </h4>
               <ul className="list-unstyled">
                 <li>
                   <a href="/privacy-policy" className="footer--link">
-                    Privacy Policy
+                    <FormattedMessage id="footer_privacyPolicy" />
                   </a>
                 </li>
                 <li>
                   <a href="/terms-conditions" className="footer--link">
-                    Terms & Coditions
+                    <FormattedMessage id="footer_terms_conditions" />
                   </a>
                 </li>
                 <li>
                   <a href="/refund-policy" className="footer--link">
-                    Refund Policy
+                    <FormattedMessage id="footer_refundPolicy" />
                   </a>
                 </li>
                 <li>
                   <a href="/cookies-policy" className="footer--link">
-                    Cookies
+                    <FormattedMessage id="footer_cookies" />
                   </a>
                 </li>
               </ul>
             </div>
             <div className="col-md-3 col-6">
-              <h4>Social Media</h4>
+              <h4>
+                <FormattedMessage id="footer_socialMedia" />
+              </h4>
               <ul className="list-unstyled">
                 <li>
                   <a href="#instagram" className="footer--link">
-                    Instagram
+                    <FormattedMessage id="footer_instagram" />
                   </a>
                 </li>
                 <li>
                   <a href="#facebook" className="footer--link">
-                    Facebook
+                    <FormattedMessage id="footer_facebook" />
                   </a>
                 </li>
                 <li>
                   <a href="#twitter" className="footer--link">
-                    Twitter
+                    <FormattedMessage id="footer_twitter" />
                   </a>
                 </li>
                 <li>
                   <a href="#tiktok" className="footer--link">
-                    TikTok
+                    <FormattedMessage id="footer_tikTok" />
                   </a>
                 </li>
               </ul>
@@ -101,8 +115,8 @@ const Footer = () => {
           </div>
           <div className="footer-bottom">
             <p className="text-center">
-              &copy;{new Date().getFullYear()} Fashion Ecomm Website - All
-              Rights Reserved
+              &copy;{new Date().getFullYear()}{" "}
+              <FormattedMessage id="footer_copyright" />
             </p>
           </div>
         </div>

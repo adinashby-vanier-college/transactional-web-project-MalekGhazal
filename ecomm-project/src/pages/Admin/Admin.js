@@ -42,8 +42,6 @@ function Admin() {
     return () => unsubscribe();
   }, []);
 
-  console.log(currentUser);
-
   return currentUser ? <ItemListComponent /> : <Login />;
 }
 

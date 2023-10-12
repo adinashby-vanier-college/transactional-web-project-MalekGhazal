@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Pagination from "./Pagination";
+import { FormattedMessage } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import {
   getFirestore,
@@ -155,18 +156,22 @@ function Product() {
     <>
       {notification && <div className="notification-popup">{notification}</div>}
       <h1 className="header text-center pb-5 collections--header">
-        Collection
+        <FormattedMessage id="product_collection" />
       </h1>
       <div className="InputContainer mx-auto">
-        <input
-          placeholder="Search.."
-          id="input"
-          className="input"
-          name="text"
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <FormattedMessage id="product_search">
+          {(msg) => (
+            <input
+              placeholder={msg}
+              id="input"
+              className="input"
+              name="text"
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          )}
+        </FormattedMessage>
         <a
           href="#favorite-filter"
           className="favorite-icon"
@@ -224,7 +229,7 @@ function Product() {
                     style={{ fontSize: "20px" }}
                     onClick={() => handleAddToCart(product)}
                   >
-                    Add to Cart
+                    <FormattedMessage id="product_addToCart" />
                   </Button>
                 </div>
               </Card.Body>

@@ -1,5 +1,6 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
+import { FormattedMessage } from "react-intl";
 
 const FAQ = () => {
   return (
@@ -9,45 +10,35 @@ const FAQ = () => {
 
       <Accordion defaultActiveKey="0" className="container faq">
         <Accordion.Item eventKey="0">
-          <Accordion.Header>What is your return policy?</Accordion.Header>
+          <Accordion.Header>
+            <FormattedMessage id="faq_question1" />
+          </Accordion.Header>
           <Accordion.Body>
-            We offer a hassle-free return policy for clothing items. If you're
-            not completely satisfied with your purchase, you can return it
-            within 30 days for a full refund or exchange. Please make sure the
-            items are in their original condition with tags attached.
+            <FormattedMessage id="faq_answer1" />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            How do I determine my size when ordering online?
+            <FormattedMessage id="faq_question2" />
           </Accordion.Header>
           <Accordion.Body>
-            To find the perfect size, we recommend checking our detailed size
-            chart, which can be found on the product page. Measure yourself and
-            compare your measurements to the chart to select the most suitable
-            size for your body type.
+            <FormattedMessage id="faq_answer2" />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="2">
           <Accordion.Header>
-            Are your products ethically sourced and environmentally friendly?
+            <FormattedMessage id="faq_question3" />
           </Accordion.Header>
           <Accordion.Body>
-            Yes, we are committed to ethical and sustainable practices. Our
-            products are sourced from responsible suppliers, and we prioritize
-            eco-friendly materials and production processes whenever possible.
-            We believe in fashion that cares for both people and the planet.
+            <FormattedMessage id="faq_answer3" />
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="3">
           <Accordion.Header>
-            Can I track my order after it's been shipped?
+            <FormattedMessage id="faq_question4" />
           </Accordion.Header>
           <Accordion.Body>
-            Absolutely! Once your order is shipped, you will receive a tracking
-            number via email. You can use this tracking number to monitor the
-            status and location of your package until it arrives at your
-            doorstep. We value transparency in the delivery process.
+            <FormattedMessage id="faq_answer4" />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

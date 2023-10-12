@@ -83,3 +83,14 @@
     transition: 0.5s;
   }
 }
+.spacer{
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.language-switcher{
+  border: 0;
+  background-color: var(--primary-blue);
+  color:var(--secondary-baige);
+  font-size: 16px;
+}
