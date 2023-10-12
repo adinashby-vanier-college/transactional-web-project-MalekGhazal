@@ -22,6 +22,7 @@ import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import PaymentCancelled from "./components/Payments/PaymentCancelled";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ProductDetail from "./pages/Products/ProductDetails";
 
 const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
@@ -87,6 +88,8 @@ function App() {
                   path="/cart"
                   element={<Cart currentUser={currentUser} />}
                 />
+                <Route path="/product/:productId" element={<ProductDetail />} />
+
                 <Route path="/*" element={<NotFound />} />
               </Routes>
             )}

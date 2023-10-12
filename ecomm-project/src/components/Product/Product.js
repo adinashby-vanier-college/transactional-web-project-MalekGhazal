@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "./Product.css";
+import { Link } from "react-router-dom";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -183,11 +184,17 @@ function Product() {
           {filteredProducts.map((product, index) => (
             <Card key={index} className="p-4 custom-card text-center">
               <div className="d-flex justify-content-center align-items-center">
-                <Card.Img
-                  variant="top"
-                  src={product.img}
-                  className="product-img"
-                />
+                <Link
+                  to={{
+                    pathname: `/product/${product._id}`,
+                  }}
+                >
+                  <Card.Img
+                    variant="top"
+                    src={product.img}
+                    className="product-img"
+                  />
+                </Link>
               </div>
               <a
                 href="#like"
