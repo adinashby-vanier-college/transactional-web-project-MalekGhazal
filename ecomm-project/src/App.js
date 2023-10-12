@@ -23,6 +23,8 @@ import PaymentSuccess from "./components/Payments/PaymentSuccess";
 import PaymentCancelled from "./components/Payments/PaymentCancelled";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { LOCALES } from "./locales/locales";
+import { messages } from "./locales/messages";
 
 const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
