@@ -65,7 +65,8 @@ function ItemListComponent() {
 
   return (
     <div className="ItemList my-4">
-      <Container>
+      <h1 className="header text-center">Admin Panel</h1>
+      <Container className="ItemList--section">
         <Button className="my-2 addItem-btn" onClick={navigateToAddItem}>
           Add Product
         </Button>
@@ -142,7 +143,7 @@ function ItemListComponent() {
             </tbody>
           </Table>
         </Row>
-        <div>
+        <div className="itemList-pages">
           <Pagination
             totalItems={itemList.length}
             productsPerPage={itemsPerPage}

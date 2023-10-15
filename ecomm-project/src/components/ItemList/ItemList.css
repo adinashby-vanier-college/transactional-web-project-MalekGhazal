@@ -1,3 +1,13 @@
+.ItemList--section {
+  border-radius: 25px;
+  background-color: white;
+  margin-top: 5rem;
+}
+
+.itemList-pages {
+  padding-bottom: 1rem;
+}
+
 .itemlist-img {
   border-radius: 100%;
   width: 100%;
@@ -26,7 +36,7 @@
 
 .addItem-btn {
   background-color: #6dacc9;
-  border: none;
+  border: 1px solid #6dacc9;
   /* width: 60%;
       height: 50px;
       position: absolute;
@@ -36,8 +46,8 @@
 
   &:hover {
     background-color: transparent;
-    border: 2px solid #6dacc9;
-    color: white;
+    border: 1px solid #6dacc9;
+    color: var(--primary-blue);
     /* transition: 0.3s; */
   }
 }
@@ -48,9 +58,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom,
-      var(--secondary-baige),
-      var(--primary-baige));
+  background: linear-gradient(
+    to bottom,
+    var(--secondary-baige),
+    var(--primary-baige)
+  );
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;

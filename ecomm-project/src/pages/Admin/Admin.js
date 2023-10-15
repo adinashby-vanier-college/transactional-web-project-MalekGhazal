@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import ItemListComponent from "../../components/ItemList/ItemList";
 import Home from "../Home/Home";
