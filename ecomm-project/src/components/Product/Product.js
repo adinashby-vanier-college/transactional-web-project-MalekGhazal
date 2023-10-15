@@ -219,7 +219,11 @@ function Product() {
               <div className="half_circle"></div>
               <Card.Body className="card-body">
                 <Card.Title className="card-title">{product.name}</Card.Title>
-                <Card.Text className="card-price">{product.price}</Card.Text>
+                <Card.Text className="card-price">
+                  {product.price.startsWith("$ ")
+                    ? product.price
+                    : "$  " + product.price}
+                </Card.Text>
                 <Card.Text className="custom-card-text">
                   {product.description}
                 </Card.Text>

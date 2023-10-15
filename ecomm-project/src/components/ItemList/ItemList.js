@@ -121,12 +121,14 @@ function ItemListComponent() {
 
                   <td className="justify-content-md-center">
                     <i
-                      className="bi bi-pencil-square icon-edit-color"
+                      // className="bi bi-pencil-square icon-edit-color"
+                      className="fa-regular fa-pen-to-square icon-edit-color"
                       onClick={() => navigateToUpdate(val._id)}
                     ></i>{" "}
                     ||{" "}
                     <i
-                      className="bi bi-trash3-fill icon-delete-color"
+                      // className="bi bi-trash3-fill icon-delete-color"
+                      className="fa-solid fa-trash icon-delete-color"
                       onClick={() => navigateToDelete(val._id)}
                     ></i>{" "}
                     {/* ||{" "}
