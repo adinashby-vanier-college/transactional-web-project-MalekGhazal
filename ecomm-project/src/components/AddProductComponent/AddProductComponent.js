@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Container, Row, Form, Button } from "react-bootstrap";
+import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import "./AddProductComponent.css";
@@ -183,6 +183,7 @@ function AddProductComponent() {
         alert("Validation error:" + validationErrors);
       });
   };
+
   const saveToDatabase = (filePath) => {
     if (isAdd) {
       //Add product
@@ -253,13 +254,13 @@ function AddProductComponent() {
   };
 
   return (
-    <div className="form my-4">
+    <div className="add-product-form form my-4 container">
       <Container>
         <h1 className="add-product-title">
           {isAdd ? "Add Product" : "Update Product"}
         </h1>
-        <Row className="form-row">
-          <Form>
+        <Row className="form-row mx-auto">
+          <Form as={Col} sm={6}>
             <Form.Group className="mb-3" controlId="formProductId">
               <Form.Label className="text-left">Product Id:</Form.Label>
               <Form.Control
@@ -277,7 +278,6 @@ function AddProductComponent() {
               <Form.Label>Product Name:</Form.Label>
               <Form.Control
                 type="text"
-                // placeholder="Enter Product Name"
                 name="productName"
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
@@ -287,12 +287,13 @@ function AddProductComponent() {
                 spaces and: ./,_()-.
               </Form.Text>
             </Form.Group>
+          </Form>
 
+          <Form as={Col} sm={6}>
             <Form.Group className="mb-3" controlId="formProductDescription">
               <Form.Label>Product Description:</Form.Label>
               <Form.Control
                 type="text"
-                // placeholder="Enter Product Description"
                 name="productDescription"
                 value={productDescription}
                 onChange={(e) => setProductDescription(e.target.value)}
@@ -306,7 +307,6 @@ function AddProductComponent() {
               <Form.Label>Product Category:</Form.Label>
               <Form.Control
                 type="text"
-                // placeholder="Enter Product Category"
                 name="productCategory"
                 value={productCategory}
                 onChange={(e) => setProductCategory(e.target.value)}
@@ -315,7 +315,11 @@ function AddProductComponent() {
                 Required, 2-100 characters.
               </Form.Text>
             </Form.Group>
+          </Form>
+        </Row>
 
+        <Row className="form-row mx-auto">
+          <Form as={Col} sm={6}>
             <Form.Group className="mb-3" controlId="formProductPrice">
               <Form.Label>Product Price:</Form.Label>
               <Form.Control
@@ -323,13 +327,12 @@ function AddProductComponent() {
                 min={0}
                 max={1000000.0}
                 step="any"
-                // placeholder="Enter Product Price"
                 name="productPrice"
                 value={productPrice}
                 onChange={(e) => setProductPrice(e.target.value)}
               />
               <Form.Text className="text-muted">
-                Required, must higher than 0.
+                Required, must be higher than 0.
               </Form.Text>
             </Form.Group>
 
@@ -337,16 +340,17 @@ function AddProductComponent() {
               <Form.Label>In Stock:</Form.Label>
               <Form.Control
                 type="number"
-                // placeholder="Enter In Stock"
                 name="inStock"
                 value={inStock}
                 onChange={(e) => setInStock(e.target.value)}
               />
               <Form.Text className="text-muted">
-                Required, must higher than 0.
+                Required, must be higher than 0.
               </Form.Text>
             </Form.Group>
+          </Form>
 
+          <Form as={Col} sm={6}>
             <Form.Group className="mb-3" controlId="formUploadImg">
               <Form.Label>Upload Image:</Form.Label>
               <Form.Control
@@ -354,25 +358,30 @@ function AddProductComponent() {
                 name="uploadImg"
                 accept=".jpg, .png, .jpeg"
                 multiple={false}
-                // value={uploadImgPath.name}
                 onChange={(e) => setUploadImg(e.target.files[0])}
               />
               <Form.Text className="text-muted">
                 Required, image format is jpg, png.
               </Form.Text>
             </Form.Group>
-
-            <Button className="submit-product-btn" onClick={addProduct}>
-              Save
-            </Button>
-            <Button
-              className="mx-5 cancel-product-btn"
-              variant="warning"
-              onClick={navigateToItemList}
-            >
-              Cancel
-            </Button>
           </Form>
+        </Row>
+
+        <Row className="form-row mx-auto">
+          <Col sm={12}>
+            <div className="d-flex flex-column flex-sm-row justify-content-between">
+              <Button className="submit-product-btn" onClick={addProduct}>
+                Save
+              </Button>
+              <Button
+                className="mx-2 mx-sm-5 cancel-product-btn"
+                variant="warning"
+                onClick={navigateToItemList}
+              >
+                Cancel
+              </Button>
+            </div>
+          </Col>
         </Row>
       </Container>
     </div>

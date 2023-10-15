@@ -16,7 +16,6 @@ const ProductDetail = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [notification, setNotification] = useState(null);
   const { productId } = useParams();
-
   const isMounted = useRef(true);
   const db = getFirestore();
   const auth = getAuth();
@@ -135,103 +134,106 @@ const ProductDetail = (props) => {
   };
 
   return (
-    <div className="container mt-5 pt-5">
-      <div
-        className="card mx-auto mb-3 product-details-card"
-        style={{ marginRight: "540px" }}
-      >
-        <div className="row g-0">
-          <div className="col-md-4">
-            <img
-              src={product.img}
-              className="img-fluid h-100"
-              alt="the product img"
-            />
-          </div>
-          <div className="col-md-8">
-            <div className="m-5">
-              <h1 className="display-4 product-title">{product.name}</h1>
-              <h2 className="">{product.price}</h2>
-              <h4 className="mt-5">{product.description}</h4>
-            </div>
-            <h3 className="ms-5 mb-0">Sizes</h3>
-            <div className="form-check form-check-inline ms-5 mt-2">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                value="option1"
+    <>
+      {notification && <div className="notification-popup">{notification}</div>}
+      <div className="container mt-5 pt-5">
+        <div
+          className="card mx-auto mb-3 product-details-card"
+          style={{ marginRight: "540px" }}
+        >
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img
+                src={product.img}
+                className="img-fluid h-100"
+                alt="the product img"
               />
-              <label className="form-check-label" for="inlineRadio1">
-                S
-              </label>
             </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                value="option2"
-              />
-              <label className="form-check-label" for="inlineRadio2">
-                M
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio3"
-                value="option3"
-              />
-              <label className="form-check-label" for="inlineRadio3">
-                L
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="inlineRadio3"
-                value="option3"
-              />
-              <label className="form-check-label" for="inlineRadio3">
-                XL
-              </label>
-            </div>
-            <h4 className="m-5">In Stock: {product.inStock}</h4>
-            <div className="m-5 pt-5 col-md-8">
-              <a
-                onClick={() => handleAddToCart(product)}
-                href="#addtocart"
-                className="btn btn-primary px-4 me-3 add--to-cart-btn"
-              >
-                ADD TO CART <i className="ms-2 fa-solid fa-cart-shopping"></i>
-              </a>
-              <a
-                href="#like"
-                className="add-to-wishlist-btn btn btn-primary px-4"
-                onClick={() => handleWishlist(product)}
-              >
-                <i
-                  className={
-                    currentUser?.wishlist?.some(
-                      (wish) => wish._id === product._id
-                    )
-                      ? "fa-solid fa-heart"
-                      : "fa-regular fa-heart"
-                  }
-                ></i>
-              </a>
+            <div className="col-md-8">
+              <div className="m-5">
+                <h1 className="display-4 product-title">{product.name}</h1>
+                <h2 className="">{product.price}</h2>
+                <h4 className="mt-5">{product.description}</h4>
+              </div>
+              <h3 className="ms-5 mb-0">Sizes</h3>
+              <div className="form-check form-check-inline ms-5 mt-2">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="option1"
+                />
+                <label className="form-check-label" for="inlineRadio1">
+                  S
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio2"
+                  value="option2"
+                />
+                <label className="form-check-label" for="inlineRadio2">
+                  M
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="option3"
+                />
+                <label className="form-check-label" for="inlineRadio3">
+                  L
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio3"
+                  value="option3"
+                />
+                <label className="form-check-label" for="inlineRadio3">
+                  XL
+                </label>
+              </div>
+              <h4 className="m-5">In Stock: {product.inStock}</h4>
+              <div className="m-5 pt-5 col-md-8">
+                <a
+                  onClick={() => handleAddToCart(product)}
+                  href="#addtocart"
+                  className="btn btn-primary px-4 me-3 add--to-cart-btn"
+                >
+                  ADD TO CART <i className="ms-2 fa-solid fa-cart-shopping"></i>
+                </a>
+                <a
+                  href="#like"
+                  className="add-to-wishlist-btn btn btn-primary px-4"
+                  onClick={() => handleWishlist(product)}
+                >
+                  <i
+                    className={
+                      currentUser?.wishlist?.some(
+                        (wish) => wish._id === product._id
+                      )
+                        ? "fa-solid fa-heart"
+                        : "fa-regular fa-heart"
+                    }
+                  ></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
