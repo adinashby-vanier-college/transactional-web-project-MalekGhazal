@@ -25,7 +25,7 @@ const ProductDetail = (props) => {
     const productIdToFind = productId;
 
     if (isMounted.current) {
-      fetch(`http://localhost:4200/product/${productIdToFind}`)
+      fetch(`${process.env.REACT_APP_BASE_URL}/product/${productIdToFind}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP Error! Status: ${res.status}`);
