@@ -25,7 +25,7 @@ const ProductDetail = (props) => {
     const productIdToFind = productId;
 
     if (isMounted.current) {
-      fetch(`http://18.118.196.11/product/${productIdToFind}`)
+      fetch(`http://localhost:4200/product/${productIdToFind}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP Error! Status: ${res.status}`);
