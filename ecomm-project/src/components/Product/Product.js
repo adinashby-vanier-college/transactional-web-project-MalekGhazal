@@ -120,7 +120,7 @@ function Product() {
 
   useEffect(() => {
     if (isMounted.current) {
-      fetch(`http://18.118.196.11/product`)
+      fetch(`http://localhost:4200/product`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP Error! Status: ${res.status}`);
