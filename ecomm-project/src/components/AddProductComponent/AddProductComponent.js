@@ -45,18 +45,20 @@ function AddProductComponent() {
   useEffect(() => {
     if (id > 0) {
       setIsAdd(false); //Update
-      Axios.get("http://localhost:4200/product/" + id).then((response) => {
-        setProductId(response.data._id);
-        setProductName(response.data.name);
-        setProductDescription(response.data.description);
-        setProductCategory(response.data.category);
-        setProductPrice(response.data.price);
-        setInStock(response.data.inStock);
-        setUploadImgPath(response.data.img);
-      });
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/product/` + id).then(
+        (response) => {
+          setProductId(response.data._id);
+          setProductName(response.data.name);
+          setProductDescription(response.data.description);
+          setProductCategory(response.data.category);
+          setProductPrice(response.data.price);
+          setInStock(response.data.inStock);
+          setUploadImgPath(response.data.img);
+        }
+      );
     } else {
       setIsAdd(true); //Add
-      Axios.get("http://localhost:4200/product/")
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/product/`)
         .then((response) => {
           let pid = Math.floor(Math.random() * 10000000000000);
           let idArray = [];
@@ -187,7 +189,7 @@ function AddProductComponent() {
   const saveToDatabase = (filePath) => {
     if (isAdd) {
       //Add product
-      Axios.post("http://localhost:4200/product/", {
+      Axios.post(`${process.env.REACT_APP_BASE_URL}/product/`, {
         _id: productId,
         name: productName,
         description: productDescription,
@@ -209,7 +211,7 @@ function AddProductComponent() {
         });
     } else {
       //Update product
-      Axios.put(`http://localhost:4200/product/${productId}`, {
+      Axios.put(`${process.env.REACT_APP_BASE_URL}/product/${productId}`, {
         _id: productId,
         name: productName,
         description: productDescription,

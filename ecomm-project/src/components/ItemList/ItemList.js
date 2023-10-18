@@ -18,7 +18,7 @@ function ItemListComponent() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:4200/product/")
+    Axios.get(`${process.env.REACT_APP_BASE_URL}/product/`)
       .then((response) => {
         setItemList(response.data);
       })
@@ -34,7 +34,9 @@ function ItemListComponent() {
   const navigateToDelete = (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       // The user clicked "OK" (Yes), perform the delete action here
-      Axios.delete(`http://localhost:4200/product/${productId}`).then(
+      Axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/product/${productId}`
+      ).then(
         (response) => {
           window.location.reload();
         } // refresh the page
