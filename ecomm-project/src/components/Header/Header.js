@@ -3,8 +3,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
-import { auth } from "../../firebase";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useCart } from "../Cart/CartContext";
 import "./Header.css";
