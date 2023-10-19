@@ -1,0 +1,14 @@
+@media (max-width: 991px) {
+  .custom-centered-div {
+    text-align: center;
+  }
+}
+
+.hero--link {
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.hero--button {
+  padding-top: 35px;
+}

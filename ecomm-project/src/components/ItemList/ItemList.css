@@ -1,0 +1,70 @@
+.ItemList--section {
+  border-radius: 25px;
+  background-color: white;
+  margin-top: 5rem;
+}
+
+.itemList-pages {
+  padding-bottom: 1rem;
+}
+
+.itemlist-img {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  max-width: 100px;
+
+  object-fit: cover;
+  border: 3px solid var(--primary-blue);
+}
+
+.operations {
+  width: 110px;
+}
+
+.icon-edit-color {
+  color: var(--primary-blue);
+
+  cursor: pointer;
+}
+
+.icon-delete-color {
+  color: red;
+
+  cursor: pointer;
+}
+
+.addItem-btn {
+  background-color: #6dacc9;
+  border: 1px solid #6dacc9;
+  /* width: 60%;
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+      right: 0; */
+  border-radius: 15px;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid #6dacc9;
+    color: var(--primary-blue);
+    /* transition: 0.3s; */
+  }
+}
+
+.InputContainer {
+  width: 410px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to bottom,
+    var(--secondary-baige),
+    var(--primary-baige)
+  );
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+}

@@ -1,0 +1,30 @@
+.header {
+  color: var(--primary-baige);
+  text-shadow: 2px 2px 0px #f1f0e8;
+  font-size: 96px;
+  font-weight: 400;
+  padding-top: 8.5rem;
+}
+
+.about-border {
+  width: 160px;
+  height: 5px;
+  background: var(--primary-baige);
+  margin: 26px auto;
+  border-radius: 25px;
+}
+
+.description {
+  color: var(--secondary-baige);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 2.3rem;
+}
+
+@media (max-width: 990px) {
+  .description {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+  }
+}

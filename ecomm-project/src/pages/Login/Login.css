@@ -1,0 +1,77 @@
+.login-header {
+  color: var(--primary-baige);
+  font-size: 5rem;
+  text-align: center;
+  padding: 30px;
+}
+
+.using {
+  color: var(--secondary-baige);
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.submit {
+  background-color: var(--secondary-baige);
+  color: var(--secondary-blue);
+  border: 0;
+  width: 300px;
+  text-align: center;
+  margin-top: 20px;
+}
+.submit:hover {
+  background-color: var(--secondary-blue);
+  color: var(--primary-baige);
+}
+
+.group {
+  margin-bottom: 20px;
+  width: 300px;
+  padding-bottom: 0;
+}
+
+.icon {
+  background-color: var(--secondary-baige);
+  color: var(--secondary-blue);
+  width: 15%;
+}
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.textbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+}
+.text {
+  padding-top: 0;
+  color: var(--primary-baige);
+  font-size: 1rem;
+}
+.input {
+  background-color: var(--secondary-baige);
+  border-left: 0;
+  height: 2.5rem;
+
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+}
+
+.google-btn {
+  background-color: var(--secondary-baige);
+  color: var(--secondary-blue);
+  border: 0;
+  width: 300px;
+  justify-content: space-evenly;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: var(--secondary-blue);
+    color: var(--primary-baige);
+  }
+}

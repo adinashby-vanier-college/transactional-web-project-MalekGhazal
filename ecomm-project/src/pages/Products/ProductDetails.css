@@ -1,0 +1,33 @@
+.add--to-cart-btn {
+  background-color: var(--primary-blue);
+  border: none;
+  padding: 10px;
+
+  &:hover {
+    background-color: var(--secondary-blue);
+  }
+}
+
+.add-to-wishlist-btn {
+  background-color: var(--primary-blue);
+  border: none;
+  padding: 10px;
+
+  &:hover {
+    background-color: var(--secondary-blue);
+  }
+
+  &:active {
+    background-color: var(--primary-blue) !important;
+  }
+}
+
+.product-details-card {
+  border-radius: 20px;
+  border: none;
+  overflow: hidden;
+}
+
+.product-title {
+  color: var(--primary-blue);
+}
