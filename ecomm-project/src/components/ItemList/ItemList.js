@@ -27,10 +27,6 @@ function ItemListComponent() {
       });
   }, []);
 
-  // const navigateToDetail = (itemId) => {
-  //   navigate(`/item/${itemId}`);
-  // };
-
   const navigateToDelete = (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       // The user clicked "OK" (Yes), perform the delete action here
@@ -60,10 +56,6 @@ function ItemListComponent() {
   const filteredItemList = currentItems.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  // .filter(
-  //   (item) =>!showFavorite ||
-  //     currentUser?.wishlist?.some((wish) => wish._id === item._id)
-  // );
 
   return (
     <div className="ItemList my-4">
